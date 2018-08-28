@@ -1,4 +1,4 @@
 class MediaCategory < ApplicationRecord
-  belongs_to :Medium
-  belongs_to :Category
+  belongs_to :medium
+  belongs_to :category
 end
