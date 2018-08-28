@@ -1,4 +1,4 @@
 class Category < ApplicationRecord
   validates :name, presence: true
-  has_many :media_category
+  has_many :media_categories
 end
