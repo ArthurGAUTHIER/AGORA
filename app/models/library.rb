@@ -1,5 +1,5 @@
 class Library < ApplicationRecord
-  belongs_to :User
-  belongs_to :Medium
+  belongs_to :user
+  belongs_to :medium
   validates :seen, default: false
 end
