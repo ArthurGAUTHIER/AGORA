@@ -1,4 +1,4 @@
 class Studio < ApplicationRecord
-  has_many :medium
+  has_many :media
   validates :name, presence:true
 end
