@@ -12,6 +12,8 @@ csv_options = { col_sep: ',', quote_char: '"', headers: :first_row }
 filepath    = 'db/IMDB-Movie-Data.csv'
 
 movies = [];
+Studio.create(name: 'test')
+
 
 CSV.foreach(filepath, csv_options) do |row|
   row['Genre'].split(',').each do |genre|
@@ -24,10 +26,10 @@ CSV.foreach(filepath, csv_options) do |row|
   end
 
   row['Actors'].split(',').each do |actor|
-    names = actor.split(',')
+    names = actor.split()
 
     if names.length > 2
-      names = [names[0..(names.length - 1), names.last]]
+      names = [names[0..(names.length - 1)].join(' '), names.last]
     end
 
     first_name = names[0]
@@ -36,7 +38,7 @@ CSV.foreach(filepath, csv_options) do |row|
     actor = Actor.find_by(first_name: first_name)
     if actor.nil?
       Actor.create(
-        first_name: first_name
+        first_name: first_name,
         last_name: last_name
         )
     end
@@ -44,24 +46,31 @@ CSV.foreach(filepath, csv_options) do |row|
 
   names = row['Director'].split()
 
-    if names.length > 2
-      names = [names[0..(names.length - 1), names.last]]
-    end
+  if names.length > 2
+    names = [names[0..(names.length - 1)].join(' '), names.last]
+  end
 
-    first_name = names[0]
-    last_name = names[1]
+  first_name = names[0]
+  last_name = names[1]
 
+  director = Director.find_by(first_name: first_name)
+  if director.nil?
   Director.create(
-    first_name: first_name
+    first_name: first_name,
     last_name: last_name
     )
+  end
 
-  Medium.create(
+  media = Medium.find_by(title: row['Title'])
+  if media.nil?
+  m = Medium.create(
     title: row['Title'],
     synopsys: row['Description'],
-    duration: row['Runtime (Minutes)'],
-    year: row['Year']
-    press_rating: row['Metascore'].to_f / 10
-    audience_rating: row['Rating']
+    duration: row['Runtime (Minutes)'].to_i,
+    year: row['Year'].to_i,
+    press_rating: row['Metascore'].to_f / 10,
+    audience_rating: row['Rating'].to_f,
+    studio: Studio.first
     )
+  end
 end
