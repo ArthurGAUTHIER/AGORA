@@ -1,4 +1,4 @@
 class MediaMood < ApplicationRecord
-  belongs_to :Medium
-  belongs_to :Mood
+  belongs_to :medium
+  belongs_to :mood
 end
