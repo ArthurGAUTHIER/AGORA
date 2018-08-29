@@ -2,13 +2,11 @@
 #home-title {
   color: $red;
   position: relative;
-  bottom: 200px;
   font-family: 'Permanent Marker', cursive;
   font-size: 50px;
   font-weight: bold;
   text-shadow: 2px 2px rgba(0, 0, 0, 0.4);
 }
-
 
 .banner {
   text-align: center;
@@ -17,6 +15,19 @@
   background-size: cover !important;
   background-position: center;
   display: flex;
-  align-items: center;
+  align-items: top;
+  padding-top: 40px;
   justify-content: center;
+}
+
+h3 {
+  color: $red;
+  font-family: 'Permanent Marker', cursive;
+  font-style: justify;
+}
+
+p {
+  color: $red;
+  font-family: 'Permanent Marker', cursive;
+  font-style: justify;
 }
