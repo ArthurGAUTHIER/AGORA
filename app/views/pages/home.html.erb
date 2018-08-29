@@ -1,2 +1,12 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
+
+  <div class="row">
+    <% Medium.first(10).each do |medium| %>
+      <div class="col-xs-4">
+        <%= render 'components/card', medium: medium %>
+      </div>
+    <% end %>
+  </div>
+
+
