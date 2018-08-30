@@ -1,0 +1,50 @@
+.card {
+  background-color: white;
+  display: grid;
+  grid: auto / 1fr 2fr;
+  justify-items: center;
+  align-items: center;
+  box-shadow: 1px 1px 10px red;
+  margin: 0px 15px;
+  margin-bottom: 30px;
+}
+
+.card-image {
+  grid-area: 1 / 1 / span 4 / span 1;
+  background-color: black;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 200px;
+  height: 300px;
+}
+
+.card-title {
+  grid-area: 1 / 2 / span 1 / span 1;
+  font-size: 24px;
+}
+
+.card-synopsis {
+  grid-area: 2 / 2 / span 1 / span 1;
+  padding: 0px 15px;
+}
+
+.card-press-rating {
+  grid-area: 3 / 2 / span 1 / span 1;
+}
+
+.card-audience-rating {
+  grid-area: 4 / 2 / span 1 / span 1;
+}
+
+  h3 {
+
+  }
+
+  .off {
+    color: $grey
+  }
+
+  .on {
+    color: $yellow
+  }

@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+    mount_uploader :photo, PhotoUploader
+
     validates :email, presence: true
     validates :password, presence: true
     validates :alias, presence: true
