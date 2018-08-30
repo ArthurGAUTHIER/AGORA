@@ -8,7 +8,6 @@ class TmdbService
   def call
     # Tmdb::Discover.movie("${@words}")
     Tmdb::Discover.movie
-
   end
 end
 
