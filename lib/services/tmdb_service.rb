@@ -1,13 +1,13 @@
 
 class TmdbService
   def initialize(words)
-    @words = words.strip.gsub(' ', '+')
-  end
-  def call
+    @words = words
     Tmdb::Api.key("#{ENV['TMDB_KEY']}")
     Tmdb::Api.language("fr")
+  end
+  def call
     # Tmdb::Discover.movie("${@words}")
-    Tmdb::Search.movies("${@words}")
+    Tmdb::Discover.movie
 
   end
 end
