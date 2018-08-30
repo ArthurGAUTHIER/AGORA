@@ -1,0 +1,15 @@
+<div class="list-group">
+  <% @media.each do |medium| %>
+    <div class="list-group-item">
+      <h3><%= medium.title %></h3>
+      <span><strong>Year:</strong> <%= medium.year %></span> <span><strong>Duration:</strong> <%= (medium.duration / 60).to_s << 'h' << (medium.duration % 60).to_s << 'min'%></span>
+      <span><strong>Press Rating:</strong> <%= medium.press_rating %></span> <span><strong>Audience Rating:</strong> <%= medium.audience_rating %></span>
+      <p><strong>Synopsys:</strong> <%= medium.synopsys %></p>
+      <p><strong>Director:</strong> <%= medium.directors.map { |d| d.full_name }.join(', ') %></p>
+      <p><strong>Actors:</strong> <%= medium.actors.map { |a| a.full_name }.join(', ') %></p>
+      <p><strong>Studio:</strong> <%= medium.studio.name %></p>
+      <p><strong>Country:</strong> <%= medium.country %></p>
+      <p><strong>Language:</strong> <%= medium.language %></p>
+    </div>
+  <% end %>
+</div>

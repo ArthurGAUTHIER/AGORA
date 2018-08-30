@@ -7,70 +7,102 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'csv'
 
-
+puts 'Set CSV options...'
 csv_options = { col_sep: ',', quote_char: '"', headers: :first_row }
 filepath    = 'db/IMDB-Movie-Data.csv'
 
-movies = [];
-Studio.create(name: 'test')
+puts 'Create blank Studio...'
+studio = Studio.find_by(name: 'test')
+if studio.nil?
+  studio = Studio.create!(name: 'test')
+end
 
-
+puts 'Begin CSV parsing...'
 CSV.foreach(filepath, csv_options) do |row|
+
+  categories = [];
   row['Genre'].split(',').each do |genre|
-    categorie = Category.find_by(name: genre)
-    if categorie.nil?
-      Category.create(
+    category = Category.find_by(name: genre)
+    if category.nil?
+      category = Category.create!(
         name: genre
         )
     end
+    categories << category
   end
 
-  row['Actors'].split(',').each do |actor|
-    names = actor.split()
-
-    if names.length > 2
-      names = [names[0..(names.length - 1)].join(' '), names.last]
+  actors = []
+  row['Actors'].split(',').each do |actor_full_name|
+    names = actor_full_name.split(' ')
+    if names.length == 1
+      names = [names.first, names.first]
+    else
+      if names.length > 2
+        names = [names[0..-2].join(' '), names.last]
+      end
     end
 
     first_name = names[0]
     last_name = names[1]
 
-    actor = Actor.find_by(first_name: first_name)
+    actor = nil
+    Actor.where(last_name: last_name).each do |actor_family|
+      if actor_family.first_name == first_name
+        actor = actor_family
+      end
+    end
+
     if actor.nil?
-      Actor.create(
+      actor = Actor.create!(
         first_name: first_name,
         last_name: last_name
         )
     end
+    actors << actor
   end
 
-  names = row['Director'].split()
+  names = row['Director'].split(' ')
 
-  if names.length > 2
-    names = [names[0..(names.length - 1)].join(' '), names.last]
+  if names.length == 1
+    names = [names.first, names.first]
+  else
+    if names.length > 2
+      names = [names[0..-2].join(' '), names.last]
+    end
   end
 
   first_name = names[0]
   last_name = names[1]
 
-  director = Director.find_by(first_name: first_name)
-  if director.nil?
-  Director.create(
-    first_name: first_name,
-    last_name: last_name
-    )
+  director = nil
+  Director.where(last_name: last_name).each do |director_family|
+    if director_family.first_name == first_name
+      director = director_family
+    end
   end
 
-  media = Medium.find_by(title: row['Title'])
-  if media.nil?
-  m = Medium.create(
-    title: row['Title'],
-    synopsys: row['Description'],
-    duration: row['Runtime (Minutes)'].to_i,
-    year: row['Year'].to_i,
-    press_rating: row['Metascore'].to_f / 10,
-    audience_rating: row['Rating'].to_f,
-    studio: Studio.first
-    )
+  if director.nil?
+    director = Director.create!(
+      first_name: first_name,
+      last_name: last_name
+      )
+  end
+
+  medium = Medium.find_by(title: row['Title'])
+  if medium.nil?
+    medium = Medium.create!(
+      title: row['Title'],
+      synopsys: row['Description'],
+      duration: row['Runtime (Minutes)'].to_i,
+      year: row['Year'].to_i,
+      press_rating: row['Metascore'].to_f / 10,
+      audience_rating: row['Rating'].to_f,
+      studio: studio
+      )
+    medium.directors = [director]
+    medium.actors = actors
+    medium.categories = categories
   end
 end
+puts 'CSV parsing done...'
+puts 'Seed generated...'
