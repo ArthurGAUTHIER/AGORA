@@ -1,4 +1,4 @@
-
+#with the gem Tmdb
 class TmdbService
   def initialize(words)
     @words = words
