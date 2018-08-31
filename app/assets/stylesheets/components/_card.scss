@@ -1,50 +1,69 @@
 .card {
-  background-color: white;
-  display: grid;
-  grid: auto / 1fr 2fr;
-  justify-items: center;
-  align-items: center;
-  box-shadow: 1px 1px 10px red;
-  margin: 0px 15px;
-  margin-bottom: 30px;
+  height: 370px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  box-shadow: 1px 1px 10px $black;
+  position: relative;
 }
 
-.card-image {
-  grid-area: 1 / 1 / span 4 / span 1;
-  background-color: black;
+.card-body {
+  background-size: cover !important;
   background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 200px;
-  height: 300px;
+  height: 310px;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  color: $white;
 }
 
-.card-title {
-  grid-area: 1 / 2 / span 1 / span 1;
-  font-size: 24px;
+.card-footer {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  height: 60px;
+  padding: 10px;
+  font-size: 14px;
 }
 
-.card-synopsis {
-  grid-area: 2 / 2 / span 1 / span 1;
-  padding: 0px 15px;
+.card-category {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 15px;
+  text-transform: uppercase;
 }
 
-.card-press-rating {
-  grid-area: 3 / 2 / span 1 / span 1;
+.card-description {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
 }
 
-.card-audience-rating {
-  grid-area: 4 / 2 / span 1 / span 1;
+.card-description h2 {
+  font-size: 18px;
 }
 
-  h3 {
 
-  }
+.card:hover {
+  opacity: 0.8;
+}
 
-  .off {
-    color: $grey
-  }
+.card-link {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  z-index: 2;
+  background: black;
+  opacity: 0;
+}
 
-  .on {
-    color: $yellow
-  }
+.off {
+  color: $grey;
+}
+
+.on {
+  color: $yellow;
+}

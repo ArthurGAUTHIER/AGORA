@@ -2,21 +2,57 @@
 <br><br><br><br><br>
 
 <ul class="nav nav-tabs" role="tablist">
-  <li id="home-title" role="presentation" class="active"><a id="home-title-design" class="tab"  href="#home" aria-controls="home" role="tab" data-toggle="tab">Watch later</a></li>
-  <li id="bookings-title" role="presentation"><a id="bookings-title-design"  class="tab" href="#bookings" aria-controls="bookings" role="tab" data-toggle="tab">Already watched</a></li>
-  <li id="rentals-title" role="presentation"><a id="rentals-title-design"  class="tab" href="#rentals" aria-controls="rentals" role="tab" data-toggle="tab">Blacklist</a></li>
-  <li id="rentals-title" role="presentation"><a id="rentals-title-design"  class="tab" href="#rentals" aria-controls="rentals" role="tab" data-toggle="tab">Preferences</a></li>
-  <li id="rentals-title" role="presentation"><a id="rentals-title-design"  class="tab" href="#rentals" aria-controls="rentals" role="tab" data-toggle="tab">Profile</a></li>
+  <li id="already_watched-title" role="presentation" class="active"><a id="already_watched-title-design"  class="tab" href="#already_watched" aria-controls="already_watched" role="tab" data-toggle="tab">ALREADY WATCH</a></li>
+  <li id="watch-later-title" role="presentation"><a id="watch-later-title-design" class="tab"  href="#watch-later" aria-controls="watch-later" role="tab" data-toggle="tab">WATCH LATER</a></li>
+  <li id="blacklist-title" role="presentation"><a id="blacklist-title-design"  class="tab" href="#blacklist" aria-controls="blacklist" role="tab" data-toggle="tab">BLACKLIST</a></li>
+  <li id="preferences-title" role="presentation"><a id="preferences-title-design"  class="tab" href="#preferences" aria-controls="preferences" role="tab" data-toggle="tab">PREFERENCES</a></li>
+  <li id="profile-title" role="presentation"><a id="profile-title-design"  class="tab" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">PROFILE</a></li>
 </ul>
 
 <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="home">
-      <h1>HOME</h1>
+  <div role="tabpanel" class="tab-pane active" id="already_watched">
+    <h1>ALREADY WATCHED</h1>
+    <div class="container">
+      <div class="row">
+        <% Library.all.where(already_watched: true).each do |content| %>
+          <div class="col-xs-12 col-sm-3">
+            <%= render 'components/card', medium: content.medium %>
+          </div>
+        <% end %>
+      </div>
     </div>
-    <div role="tabpanel" class="tab-pane" id="bookings">
-      <h1>BOOKINGS</h1>
-    </div>
-    <div role="tabpanel" class="tab-pane" id="rentals">
-      <h1>RENTALS</h1>
-    </div>
+    <br>
   </div>
+  <div role="tabpanel" class="tab-pane" id="watch-later">
+    <h1>WATCH LATER</h1>
+    <div class="container">
+      <div class="row">
+        <% Library.all.where(watch_later: true).each do |content| %>
+          <div class="col-xs-12 col-sm-3">
+            <%= render 'components/card', medium: content.medium %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <br>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="blacklist">
+    <h1>BLACKLIST</h1>
+    <div class="container">
+      <div class="row">
+        <% Library.all.where(blacklist: true).each do |content| %>
+          <div class="col-xs-12 col-sm-3">
+            <%= render 'components/card', medium: content.medium %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <br>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="preferences">
+    <h1>PREFERENCES</h1>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="profile">
+    <h1>PROFILE</h1>
+  </div>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_29_171632) do
+ActiveRecord::Schema.define(version: 2018_08_31_102958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,9 +38,11 @@ ActiveRecord::Schema.define(version: 2018_08_29_171632) do
   create_table "libraries", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "medium_id"
-    t.boolean "seen"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "already_watched", default: false
+    t.boolean "watch_later", default: false
+    t.boolean "blacklist", default: false
     t.index ["medium_id"], name: "index_libraries_on_medium_id"
     t.index ["user_id"], name: "index_libraries_on_user_id"
   end
