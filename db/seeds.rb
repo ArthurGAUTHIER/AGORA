@@ -7,6 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'csv'
 
+BOOL = [false, true]
+
 puts 'Set CSV options...'
 csv_options = { col_sep: ',', quote_char: '"', headers: :first_row }
 filepath    = 'db/IMDB-Movie-Data.csv'
@@ -105,4 +107,38 @@ CSV.foreach(filepath, csv_options) do |row|
   end
 end
 puts 'CSV parsing done...'
+
+users = []
+puts 'Create users...'
+5.times do |i|
+  user = User.create!(
+    email: "user#{i}@gmail.com",
+    password: '123456',
+    password_confirmation: '123456',
+    alias: 'random#{i}'
+    )
+  users << user
+end
+
+puts 'Create reviews...'
+2.times do |i|
+  Review.create!(
+    title: "Super #{i}",
+    description: "C dingue ce truc #{'+' * i}",
+    user: User.all.sample,
+    medium: Medium.all.sample
+    )
+end
+
+puts 'Create libraries...'
+5.times do |i|
+  Library.create!(
+    already_watched: BOOL.sample,
+    watch_later: BOOL.sample,
+    blacklist: BOOL.sample,
+    user: User.first,
+    medium: Medium.all.sample
+    )
+end
+
 puts 'Seed generated...'
