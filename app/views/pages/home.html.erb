@@ -1,9 +1,9 @@
-<div class="banner">
+<div class="banner" style="background-image: url('<%= image_path 'cinema.jpg' %>');">
   <div class="banner-content">
       <div class="text-center">
         <h1 id="home-title">HOW DO YOU FEELM ?</h1>
-        <form action="">
-          <input type="text" name="quick-search">
+        <form action="<%= discover_path %>">
+          <input type="text" name="quick-search" placeholder="Genre, Actor, Director, Duration ...">
           <input type="submit" value="Search">
           <div class="container">
             <%= render 'components/preferences' %>
