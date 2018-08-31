@@ -4,6 +4,7 @@
 		margin: 0;
 		display: inline-block;
 		vertical-align: top;
+    width: auto; /*Needed to not screw the view*/
 	}
 
 	input[type="range"].multirange.original {
