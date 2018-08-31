@@ -1,5 +1,7 @@
 class Medium < ApplicationRecord
   belongs_to :studio
+  has_many :libraries
+  has_many :users, through: :libraries
   has_many :media_actors
   has_many :media_directors
   has_many :media_moods

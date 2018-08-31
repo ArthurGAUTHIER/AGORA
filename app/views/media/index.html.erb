@@ -1,16 +1,151 @@
-<div><%= @advanced if @advanced %></div>
+  <% medium = @media.first # developement %>
+  <div class="wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-8">
+          <h1><%= medium.title %></h1>
+        </div>
+        <div class="col-xs-4">
+          <p><%= (medium.duration / 60).to_s << 'h' << (medium.duration % 60).to_s << 'min'%></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4">
+          <% simple_form_for medium.libraries.find_by(user: current_user) do |f| %>
+          <div class="form-group form-inline">
+            <%= f.input :already_watched, value: 'on', as: :hidden %>
+            <%= f.submit %>
+          </div>
+          <% end %>
+        </div>
+        <div class="col-xs-4">
+         <% simple_form_for medium.libraries do |f| %>
+         <div class="form-group form-inline">
+          <%= f.input :already_watched, as: :hidden %>
+          <%= f.submit %>
+        </div>
+        <% end %>
+        <%= f.input :watch_later, as: :hidden %>
+      </div>
+      <div class="col-xs-4">
+       <% simple_form_for medium.libraries do |f| %>
+       <div class="form-group form-inline">
+      <%= f.input :blacklist, as: :hidden %>
+        <%= f.input :already_watched, as: :hidden %>
+        <%= f.submit %>
+      </div>
+      <% end %>
+
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+
+<div class="wrapper">
+  <div class="container">
+    <div class="red-well wrapper-well">
+      <div class="media">
+        <div class="media-left media-middle">
+          <%= image_tag 'avatar-movie.jpg', width: 300, height: 450, class: 'media-object' %>
+        </div>
+        <div class="media-body media-middle">
+          <h2 class="media-heading text-center"><%= medium.title %></h2>
+          <p class="wrapper-container"><%= medium.synopsys %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="wrapper-container">
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="media">
+        <div class="media-left media-middle">
+          <strong>Actors</strong>
+        </div>
+        <div class="media-body media-middle">
+          <div class="row">
+            <% medium.actors.each do |actor| %>
+            <div class="col-xs-3">
+              <div class="text-center">
+                <%= image_tag 'blank-avatar.png', width: 80, height: 80 %>
+                <p><%= actor.full_name %></p>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="media">
+        <div class="media-left media-middle">
+          <strong>Studio</strong>
+        </div>
+        <div class="media-body media-middle">
+          <p><%= medium.studio.name %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="wrapper-container">
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="row">
+        <div class="media">
+          <div class="media-left media-middle">
+            <strong>Director</strong>
+          </div>
+          <div class="media-body media-middle">
+            <div class="row">
+              <% medium.directors.each do |director| %>
+              <div class="col-xs-3">
+                <div class="text-center">
+                  <%= image_tag 'blank-avatar.png', width: 80, height: 80 %>
+                  <p><%= director.full_name %></p>
+                </div>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="media">
+        <div class="media-left media-middle">
+          <strong>Country</strong>
+        </div>
+        <div class="media-body media-middle">
+          <p><%= medium.country %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+<hr>
+<hr>
+<hr>
+<hr>
 <div class="list-group">
   <% @media.each do |medium| %>
-    <div class="list-group-item">
-      <h3><%= medium.title %></h3>
-      <span><strong>Year:</strong> <%= medium.year %></span> <span><strong>Duration:</strong> <%= (medium.duration / 60).to_s << 'h' << (medium.duration % 60).to_s << 'min'%></span>
-      <span><strong>Press Rating:</strong> <%= medium.press_rating %></span> <span><strong>Audience Rating:</strong> <%= medium.audience_rating %></span>
-      <p><strong>Synopsys:</strong> <%= medium.synopsys %></p>
-      <p><strong>Director:</strong> <%= medium.directors.map { |d| d.full_name }.join(', ') %></p>
-      <p><strong>Actors:</strong> <%= medium.actors.map { |a| a.full_name }.join(', ') %></p>
-      <p><strong>Studio:</strong> <%= medium.studio.name %></p>
-      <p><strong>Country:</strong> <%= medium.country %></p>
-      <p><strong>Language:</strong> <%= medium.language %></p>
-    </div>
+  <div class="list-group-item">
+    <h3><%= medium.title %></h3>
+    <span><strong>Year:</strong> <%= medium.year %></span> <span><strong>Duration:</strong> <%= (medium.duration / 60).to_s << 'h' << (medium.duration % 60).to_s << 'min'%></span>
+    <span><strong>Press Rating:</strong> <%= medium.press_rating %></span> <span><strong>Audience Rating:</strong> <%= medium.audience_rating %></span>
+    <p><strong>Synopsys:</strong> <%= medium.synopsys %></p>
+    <p><strong>Director:</strong> <%= medium.directors.map { |d| d.full_name }.join(', ') %></p>
+    <p><strong>Actors:</strong> <%= medium.actors.map { |a| a.full_name }.join(', ') %></p>
+    <p><strong>Studio:</strong> <%= medium.studio.name %></p>
+    <p><strong>Country:</strong> <%= medium.country %></p>
+    <p><strong>Language:</strong> <%= medium.language %></p>
+  </div>
   <% end %>
 </div>

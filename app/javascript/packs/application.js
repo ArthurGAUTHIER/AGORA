@@ -1,8 +1,5 @@
 import "bootstrap";
 
-
-console.log("Multirange loaded")
-
 function viewMultirange() {
 "use strict";
 
@@ -23,6 +20,8 @@ self.multirange = function(input) {
 
   input.classList.add("multirange", "original");
   ghost.classList.add("multirange", "ghost");
+  // MODIF : change name of the ghost
+  ghost.name = input.name.replace(']', 'max]')
 
   input.value = values[0] || min + (max - min) / 2;
   ghost.value = values[1] || min + (max - min) / 2;
