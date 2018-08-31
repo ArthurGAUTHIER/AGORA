@@ -108,37 +108,37 @@ CSV.foreach(filepath, csv_options) do |row|
 end
 puts 'CSV parsing done...'
 
-puts 'Create reviews...'
-reviews = []
-2.times do |i|
-  reviews << Review.create!(
-    title: "Super #{i}",
-    description: "C dingue ce truc #{'+' * i}"
-    )
-end
-
 users = []
 puts 'Create users...'
 5.times do |i|
   user = User.create!(
-    email: 'user' << i,
+    email: "user#{i}@gmail.com",
     password: '123456',
     password_confirmation: '123456',
-    alias: 'random' << i,
-    reviews: reviews
+    alias: 'random#{i}'
     )
-  user.reviews = reviews
+  users << user
+end
+
+puts 'Create reviews...'
+2.times do |i|
+  Review.create!(
+    title: "Super #{i}",
+    description: "C dingue ce truc #{'+' * i}",
+    user: User.all.sample,
+    medium: Medium.all.sample
+    )
 end
 
 puts 'Create libraries...'
 5.times do |i|
-  library = Library.create!(
+  Library.create!(
     already_watched: BOOL.sample,
     watch_later: BOOL.sample,
-    blacklist: BOOL.sample
+    blacklist: BOOL.sample,
+    user: User.first,
+    medium: Medium.all.sample
     )
-  library.user = User.all.sample
-  library.media = Medium.all.sample
 end
 
 puts 'Seed generated...'

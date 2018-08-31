@@ -1,48 +1,44 @@
-  <% medium = @media.first # developement %>
-  <div class="wrapper">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-8">
-          <h1><%= medium.title %></h1>
-        </div>
-        <div class="col-xs-4">
-          <p><%= (medium.duration / 60).to_s << 'h' << (medium.duration % 60).to_s << 'min'%></p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-4">
-          <% simple_form_for medium.libraries.find_by(user: current_user) do |f| %>
-          <div class="form-group form-inline">
-            <%= f.input :already_watched, value: 'on', as: :hidden %>
-            <%= f.submit %>
-          </div>
-          <% end %>
-        </div>
-        <div class="col-xs-4">
-         <% simple_form_for medium.libraries do |f| %>
-         <div class="form-group form-inline">
-          <%= f.input :already_watched, as: :hidden %>
-          <%= f.submit %>
-        </div>
-        <% end %>
-        <%= f.input :watch_later, as: :hidden %>
+<% medium = @media.first # developement %>
+<div class="wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-8">
+        <h1><%= medium.title %></h1>
       </div>
       <div class="col-xs-4">
-       <% simple_form_for medium.libraries do |f| %>
-       <div class="form-group form-inline">
-      <%= f.input :blacklist, as: :hidden %>
-        <%= f.input :already_watched, as: :hidden %>
-        <%= f.submit %>
+        <p><%= (medium.duration / 60).to_s << 'h' << (medium.duration % 60).to_s << 'min'%></p>
       </div>
-      <% end %>
+    </div>
+    <div class="row">
+      <div class="col-xs-4">
+        <div class="text-center">
+        <div class="btn btn-primary">Blacklist</div>
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <div class="text-center">
+        <div class="btn btn-primary">Déjà vu</div>
+      </div>
+      </div>
+      <div class="col-xs-4">
+        <div class="text-center">
+        <div class="btn btn-primary">Voir plus tard</div>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="text-center">
+      <p>IMAGINE THE TRAILER</p>
 
+        </div>
+
+      </div>
+    </div>
     </div>
   </div>
-
 </div>
-</div>
-
-
 
 <div class="wrapper">
   <div class="container">
