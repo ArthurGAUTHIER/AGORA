@@ -1,5 +1,6 @@
 import "bootstrap";
 
+
 console.log("Multirange loaded")
 
 function viewMultirange() {
@@ -89,3 +90,4 @@ else {
 
 }
 viewMultirange()
+
