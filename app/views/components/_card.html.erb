@@ -1,23 +1,28 @@
-<div class="card">
-  <div class="card-image" style="background-image: url('<%= image_path 'avatar-movie.jpg' %>');"></div>
-  <div class="card-title">
-    <%= medium.title %>
+<div class="card" >
+  <a class="card-link" href="#" ></a>
+  <div class="card-body"style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path 'avatar-movie.jpg' %>');">
+    <div class="card-category"><%= medium.categories.first.name %></div>
+    <div class="card-description">
+      <h2><%= medium.title %></h2>
+    </div>
   </div>
-  <div class="card-synopsis">
-    <p><%= medium.synopsys.truncate_words(10) %></p>
-  </div>
-  <% audience_rating = (medium.audience_rating / 2).round %>
-  <% press_rating = (medium.press_rating / 2).round %>
-  <div class="card-press-rating">
-    <span>Press rating:</span>
-    <% 5.times do |i| %>
-      <span class="glyphicon glyphicon-star <%= i < press_rating ? 'on' : 'off' %>"></span>
-    <% end %>
-  </div>
-  <div class="card-audience-rating">
-    <span>Audience rating:</span>
-    <% 5.times do |i| %>
-      <span class="glyphicon glyphicon-star <%= i < audience_rating ? 'on' : 'off' %>"></span>
-      <% end %>
+  <div class="card-footer">
+    <div class="card-bottom">
+      <% audience_rating = (medium.audience_rating / 2).round %>
+      <% press_rating = (medium.press_rating / 2).round %>
+      <div class="card-press-rating">
+        <span class="rating-star">Press rating:</span>
+        <% 5.times do |i| %>
+          <span class="glyphicon glyphicon-star <%= i < press_rating ? 'on' : 'off' %>"></span>
+        <% end %>
+      </div>
+      <div class="card-audience-rating">
+        <span class="rating-star">Audience rating:</span>
+        <% 5.times do |i| %>
+          <span class="glyphicon glyphicon-star <%= i < audience_rating ? 'on' : 'off' %>"></span>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
+
