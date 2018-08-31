@@ -13,4 +13,18 @@ class Medium < ApplicationRecord
   validates :duration, presence: true
   validates :press_rating, presence: true
   validates :audience_rating, presence: true
+
+  include PgSearch
+  pg_search_scope :search_in_all,
+    against: [:title, :synopsys, :duration, :year, :country],
+    associated_against: {
+      categories: [:name],
+      moods: [:name],
+      directors: [:first_name, :last_name],
+      actors: [:first_name, :last_name],
+      studio: [:name]
+    },
+    using: {
+      tsearch: { prefix: true } # <-- now `superman batm` will return something!
+    }
 end
