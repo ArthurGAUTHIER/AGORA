@@ -1,87 +1,22 @@
 
-<br><br><br><br>
+<br><br><br><br><br>
 
-<div class="tab">
-  <button class="tablinks" onclick="openTab(event, 'Watch later')">Watch later</button>
-  <button class="tablinks" onclick="openTab(event, 'Already watched')">Already watched</button>
-  <button class="tablinks" onclick="openTab(event, 'Blacklist')">Blacklist</button>
-  <button class="tablinks" onclick="openTab(event, 'Preference')">Preference</button>
-  <button class="tablinks" onclick="openTab(event, 'Profile')">Profile</button>
-</div>
+<ul class="nav nav-tabs" role="tablist">
+  <li id="home-title" role="presentation" class="active"><a id="home-title-design" class="tab"  href="#home" aria-controls="home" role="tab" data-toggle="tab">Watch later</a></li>
+  <li id="bookings-title" role="presentation"><a id="bookings-title-design"  class="tab" href="#bookings" aria-controls="bookings" role="tab" data-toggle="tab">Already watched</a></li>
+  <li id="rentals-title" role="presentation"><a id="rentals-title-design"  class="tab" href="#rentals" aria-controls="rentals" role="tab" data-toggle="tab">Blacklist</a></li>
+  <li id="rentals-title" role="presentation"><a id="rentals-title-design"  class="tab" href="#rentals" aria-controls="rentals" role="tab" data-toggle="tab">Preferences</a></li>
+  <li id="rentals-title" role="presentation"><a id="rentals-title-design"  class="tab" href="#rentals" aria-controls="rentals" role="tab" data-toggle="tab">Profile</a></li>
+</ul>
 
-<div id="Watch later" class="tabcontent">
-  <p>Watch later</p>
-  <%= render 'components/card', medium: Medium.all.first %>
-</div>
-
-<div id="Already watched" class="tabcontent">
-  <p>Already watched</p>
-  <%= render 'components/card', medium: Medium.all.first %>
-</div>
-
-<div id="Blacklist" class="tabcontent">
-  <p>Blacklist</p>
-  <%= render 'components/card', medium: Medium.all.first %>
-</div>
-
-<div id="Preference" class="tabcontent">
-
-
-
-
-
-  <p>Preference</p>
-    <!-- Default with no input (automatically generated)  -->
-  <div class="chips"></div>
-  <div class="chips chips-initial"></div>
-  <div class="chips chips-placeholder"></div>
-  <div class="chips chips-autocomplete"></div>
-
-  <!-- Customizable input  -->
-  <div class="chips">
-    <input class="custom-class">
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home">
+      <h1>HOME</h1>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="bookings">
+      <h1>BOOKINGS</h1>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="rentals">
+      <h1>RENTALS</h1>
+    </div>
   </div>
-
-  <div class="chip">
-    Tag
-    <i class="close material-icons"><i class="fas fa-times"></i></i>
-  </div>
-
-
-
-
-
-</div>
-
-<div id="Profile" class="tabcontent">
-  <p>Profile</p>
-</div>
-
-<script>
-function openTab(event, tabName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(tabName).style.display = "block";
-    event.currentTarget.className += " active";
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.chips');
-    var instances = M.Chips.init(elems, options);
-  });
-
-  var chip = {
-    tag: 'chip content',
-    image: '', //optional
-  };
-
-  var instance = M.Chips.getInstance(elem)
-
-</script>
