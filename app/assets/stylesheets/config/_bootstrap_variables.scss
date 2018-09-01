@@ -18,10 +18,11 @@ $brand-danger:    $red;
 $brand-warning:   $orange;
 
 // Buttons & inputs' radius
-$border-radius-base:  2px;
-$border-radius-large: 2px;
+$border-radius-base:  4px;
+$border-radius-large: 6px;
 $border-radius-small: 2px;
 
+$btn-border-radius-large: 16px;
 
 // Patch to make simple_form compatible with bootstrap 3
 .invalid-feedback {
