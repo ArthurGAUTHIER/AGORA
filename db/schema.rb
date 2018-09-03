@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_31_102958) do
+ActiveRecord::Schema.define(version: 2018_09_03_100530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,6 +108,33 @@ ActiveRecord::Schema.define(version: 2018_08_31_102958) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "preference_categories", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_preference_categories_on_category_id"
+    t.index ["user_id"], name: "index_preference_categories_on_user_id"
+  end
+
+  create_table "preference_durations", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "min_duration"
+    t.integer "max_duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_preference_durations_on_user_id"
+  end
+
+  create_table "preference_moods", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "mood_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mood_id"], name: "index_preference_moods_on_mood_id"
+    t.index ["user_id"], name: "index_preference_moods_on_user_id"
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.bigint "medium_id"
     t.bigint "user_id"
@@ -150,6 +177,11 @@ ActiveRecord::Schema.define(version: 2018_08_31_102958) do
   add_foreign_key "media_directors", "media"
   add_foreign_key "media_moods", "media"
   add_foreign_key "media_moods", "moods"
+  add_foreign_key "preference_categories", "categories"
+  add_foreign_key "preference_categories", "users"
+  add_foreign_key "preference_durations", "users"
+  add_foreign_key "preference_moods", "moods"
+  add_foreign_key "preference_moods", "users"
   add_foreign_key "reviews", "media"
   add_foreign_key "reviews", "users"
 end
