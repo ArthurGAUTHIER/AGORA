@@ -1,13 +1,21 @@
-<% medium = @media.first # developement %>
-<div id="back" class="btn btn-lg btn-back"><<</div>
-<div id="next" class="btn btn-lg btn-next">>></div>
+<% if @nb > 0 %>
+  <form action="<%= discover_path %>">
+    <input type="submit" id="back" class="btn btn-lg btn-back" name="nb" value="<%= @nb - 1 %>"></input>
+  </form>
+<% end %>
+<% if @nb < session[:media].size - 1 %>
+  <form action="<%= discover_path %>">
+    <input type="submit" id="next" class="btn btn-lg btn-next" name="nb" value="<%= @nb + 1 %>"></input>
+  </form>
+<% end %>
+
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
       <div class="text-center">
         <h1>
-          <%= medium.title %>
-          <small><%= (medium.duration / 60).to_s << 'h ' << (medium.duration % 60).to_s << 'min'%></small>
+          <%= @medium.title %>
+          <small><%= (@medium.duration / 60).to_s << 'h ' << (@medium.duration % 60).to_s << 'min'%></small>
         </h1>
       </div>
     </div>
@@ -27,13 +35,13 @@
   </div>
   <div class="video-wrapper">
     <div class="embed-responsive embed-responsive-16by9">
-      <% search = URI.escape(medium.title.tr(' ', '+') << 'Trailer') %>
+      <% search = URI.escape(@medium.title.tr(' ', '+') << 'Trailer') %>
       <iframe src="https://www.youtube.com/embed?listType=search&list=<%= search %>;autoplay=0" frameborder="0"></iframe>
     </div>
   </div>
   <div class="row">
-    <% audience_rating = (medium.audience_rating / 2).round %>
-    <% press_rating = (medium.press_rating / 2).round %>
+    <% audience_rating = (@medium.audience_rating / 2).round %>
+    <% press_rating = (@medium.press_rating / 2).round %>
     <div class="col-xs-4">
       <div class="text-center">
         <h3>Audience</h3>
@@ -52,10 +60,10 @@
     </div>
     <div class="col-xs-4">
       <div class="text-center stream-links">
-        <%= link_to medium.netflix_link do %>
+        <%= link_to @medium.netflix_link do %>
           <%= image_tag 'blank-avatar.png', width: 80, height: 80 %>
         <% end %>
-        <%= link_to medium.netflix_link do %>
+        <%= link_to @medium.netflix_link do %>
           <%= image_tag 'blank-avatar.png', width: 80, height: 80 %>
         <% end %>
       </div>
@@ -71,8 +79,8 @@
           <%= image_tag 'avatar-movie.jpg', width: 300, height: 450, class: 'media-object' %>
         </div>
         <div class="media-body media-middle">
-          <h2 class="media-heading text-center"><%= medium.title %></h2>
-          <p class="wrapper-container"><%= medium.synopsys %></p>
+          <h2 class="media-heading text-center"><%= @medium.title %></h2>
+          <p class="wrapper-container"><%= @medium.synopsys %></p>
         </div>
       </div>
     </div>
@@ -87,7 +95,7 @@
         </div>
         <div class="media-body media-middle">
           <div class="row">
-            <% medium.actors.each do |actor| %>
+            <% @medium.actors.each do |actor| %>
             <div class="col-xs-3">
               <div class="text-center">
                 <%= image_tag 'blank-avatar.png', width: 80, height: 80 %>
@@ -105,7 +113,7 @@
           <strong>Studio</strong>
         </div>
         <div class="media-body media-middle">
-          <p><%= medium.studio.name %></p>
+          <p><%= @medium.studio.name %></p>
         </div>
       </div>
     </div>
@@ -121,7 +129,7 @@
           </div>
           <div class="media-body media-middle">
             <div class="row">
-              <% medium.directors.each do |director| %>
+              <% @medium.directors.each do |director| %>
               <div class="col-xs-3">
                 <div class="text-center">
                   <%= image_tag 'blank-avatar.png', width: 80, height: 80 %>
@@ -142,7 +150,7 @@
             <strong>Country</strong>
           </div>
           <div class="media-body media-middle">
-            <p><%= medium.country %></p>
+            <p><%= @medium.country %></p>
           </div>
         </div>
       </div>

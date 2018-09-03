@@ -71,6 +71,17 @@ class TmdbApiService
     movies.sort_by{|h| h['vote_average'].to_f}.reverse
   end
 
+
+  def self.call_movie(id)
+    response = RestClient.get "https://api.themoviedb.org/3/movie/#{id}?api_key=#{ENV['TMDB_KEY']}"
+    JSON.parse(response)
+  end
+
+  def self.call_movie_credits(id)
+    response = RestClient.get "https://api.themoviedb.org/3/movie/#{id}/credits?api_key=#{ENV['TMDB_KEY']}"
+    JSON.parse(response)
+  end
+
     def sort_by_duration
     d = serialize(@data)
     p d
@@ -85,6 +96,5 @@ class TmdbApiService
     year = JSON.parse(response)["results"]
     year.sort_by{|h| h['vote_average'].to_f}.reverse
   end
-
 end
 
