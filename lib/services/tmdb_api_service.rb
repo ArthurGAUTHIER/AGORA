@@ -18,7 +18,7 @@ class TmdbApiService
 
   def serialize(args)
     #here we put some symbol for answer from the form
-    # :d for director, :a for actor, :c for category
+    # :d for director, :a for actor, :c for category, y for release year, t for duration (in min)
     array = []
     args.each do |k, v|
       if k == :d
@@ -27,6 +27,14 @@ class TmdbApiService
         array << "#{v.gsub(' ', '%20')}"
       elsif k == :c
         array << "#{v.gsub(' ', ', ')}"
+      elsif k == :tmin
+        array << "with_runtime.gte=#{@data[:tmin]}"
+      elsif k == :tmax
+        array << "with_runtime.lte=#{@data[:tmax]}"
+      elsif k == :ymin
+        array << "primary_release_date.gte=#{@data[:ymin]}-01-01"
+      elsif k == :ymax
+        array << "primary_release_date.lte=#{@data[:ymax]}-12-31"
       else
         array << "#{k}=#{v}"
       end
@@ -62,5 +70,21 @@ class TmdbApiService
     movies = JSON.parse(genre)["results"]
     movies.sort_by{|h| h['vote_average'].to_f}.reverse
   end
+
+    def sort_by_duration
+    d = serialize(@data)
+    p d
+    response = RestClient.get "#{@base_url}discover/movie?api_key=#{@key}&#{d}&vote_count.gte=1"
+    duration = JSON.parse(response)["results"]
+    duration.sort_by{|h| h['vote_average'].to_f}.reverse
+  end
+
+    def sort_by_year
+    y = serialize(@data)
+    response = RestClient.get "#{@base_url}discover/movie?api_key=#{@key}&#{y}"
+    year = JSON.parse(response)["results"]
+    year.sort_by{|h| h['vote_average'].to_f}.reverse
+  end
+
 end
 
