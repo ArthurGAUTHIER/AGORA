@@ -1,41 +1,64 @@
 <% medium = @media.first # developement %>
-<div class="wrapper">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-8">
-        <h1><%= medium.title %></h1>
-      </div>
-      <div class="col-xs-4">
-        <p><%= (medium.duration / 60).to_s << 'h' << (medium.duration % 60).to_s << 'min'%></p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-4">
-        <div class="text-center">
-        <div class="btn btn-primary">Blacklist</div>
-        </div>
-      </div>
-      <div class="col-xs-4">
-        <div class="text-center">
-        <div class="btn btn-primary">Déjà vu</div>
-      </div>
-      </div>
-      <div class="col-xs-4">
-        <div class="text-center">
-        <div class="btn btn-primary">Voir plus tard</div>
-        </div>
+<div id="back" class="btn btn-lg btn-back"><<</div>
+<div id="next" class="btn btn-lg btn-next">>></div>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="text-center">
+        <h1>
+          <%= medium.title %>
+          <small><%= (medium.duration / 60).to_s << 'h ' << (medium.duration % 60).to_s << 'min'%></small>
+        </h1>
       </div>
     </div>
-    <div class="wrapper">
+  </div>
+  <div class="video-header">
     <div class="row">
       <div class="col-xs-12">
         <div class="text-center">
-      <p>IMAGINE THE TRAILER</p>
-
+          <div class="btn btn-lg btn-danger">Blacklist</div>
+          <span class="spacer"></span>
+          <div class="btn btn-lg btn-danger">Already watched</div>
+          <span class="spacer"></span>
+          <div class="btn btn-lg btn-danger">Watch later</div>
         </div>
-
       </div>
     </div>
+  </div>
+  <div class="video-wrapper">
+    <div class="embed-responsive embed-responsive-16by9">
+      <% search = URI.escape(medium.title.tr(' ', '+') << 'Trailer') %>
+      <iframe src="https://www.youtube.com/embed?listType=search&list=<%= search %>;autoplay=0" frameborder="0"></iframe>
+    </div>
+  </div>
+  <div class="row">
+    <% audience_rating = (medium.audience_rating / 2).round %>
+    <% press_rating = (medium.press_rating / 2).round %>
+    <div class="col-xs-4">
+      <div class="text-center">
+        <h3>Audience</h3>
+        <% 5.times do |i| %>
+          <span class="glyphicon glyphicon-star <%= i < audience_rating ? 'on' : 'off' %>"></span>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="text-center">
+        <h3>Press</h3>
+        <% 5.times do |i| %>
+          <span class="glyphicon glyphicon-star <%= i < audience_rating ? 'on' : 'off' %>"></span>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="text-center stream-links">
+        <%= link_to medium.netflix_link do %>
+          <%= image_tag 'blank-avatar.png', width: 80, height: 80 %>
+        <% end %>
+        <%= link_to medium.netflix_link do %>
+          <%= image_tag 'blank-avatar.png', width: 80, height: 80 %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
@@ -112,12 +135,15 @@
       </div>
     </div>
     <div class="col-xs-6">
-      <div class="media">
-        <div class="media-left media-middle">
-          <strong>Country</strong>
-        </div>
-        <div class="media-body media-middle">
-          <p><%= medium.country %></p>
+      <div class="row">
+        <div class="media">
+          <div class="media-left media-middle">
+            <div class="spacer-vertical"></div>
+            <strong>Country</strong>
+          </div>
+          <div class="media-body media-middle">
+            <p><%= medium.country %></p>
+          </div>
         </div>
       </div>
     </div>
@@ -125,23 +151,4 @@
 </div>
 </div>
 </div>
-</div>
-<hr>
-<hr>
-<hr>
-<hr>
-<div class="list-group">
-  <% @media.each do |medium| %>
-  <div class="list-group-item">
-    <h3><%= medium.title %></h3>
-    <span><strong>Year:</strong> <%= medium.year %></span> <span><strong>Duration:</strong> <%= (medium.duration / 60).to_s << 'h' << (medium.duration % 60).to_s << 'min'%></span>
-    <span><strong>Press Rating:</strong> <%= medium.press_rating %></span> <span><strong>Audience Rating:</strong> <%= medium.audience_rating %></span>
-    <p><strong>Synopsys:</strong> <%= medium.synopsys %></p>
-    <p><strong>Director:</strong> <%= medium.directors.map { |d| d.full_name }.join(', ') %></p>
-    <p><strong>Actors:</strong> <%= medium.actors.map { |a| a.full_name }.join(', ') %></p>
-    <p><strong>Studio:</strong> <%= medium.studio.name %></p>
-    <p><strong>Country:</strong> <%= medium.country %></p>
-    <p><strong>Language:</strong> <%= medium.language %></p>
-  </div>
-  <% end %>
 </div>
