@@ -32,9 +32,9 @@ class TmdbApiService
       elsif k == :tmax
         array << "with_runtime.lte=#{@data[:tmax]}"
       elsif k == :ymin
-        array << "release_date.gte=#{@data[:ymin]}-01-01"
+        array << "primary_release_date.gte=#{@data[:ymin]}-01-01"
       elsif k == :ymax
-        array << "release_date.lte=#{@data[:ymax]}-12-31"
+        array << "primary_release_date.lte=#{@data[:ymax]}-12-31"
       else
         array << "#{k}=#{v}"
       end
@@ -73,6 +73,7 @@ class TmdbApiService
 
     def sort_by_duration
     d = serialize(@data)
+    p d
     response = RestClient.get "#{@base_url}discover/movie?api_key=#{@key}&#{d}&vote_count.gte=1"
     duration = JSON.parse(response)["results"]
     duration.sort_by{|h| h['vote_average'].to_f}.reverse
