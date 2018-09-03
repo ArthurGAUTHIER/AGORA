@@ -6,7 +6,7 @@
   left: 0;
   width: 100%;
   transition: all 0.3s ease;
-  height: 70px;
+  height: 90px;
   padding: 0px 30px;
   display: flex;
   align-items: center;
@@ -15,7 +15,9 @@
 
 /* Logo */
 .navbar-agora-brand img {
-  height: 50px;
+  position: absolute;
+  top: 15px;
+  height: 90px;
 }
 
 /* User Avatar */
