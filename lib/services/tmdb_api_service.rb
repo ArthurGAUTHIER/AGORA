@@ -62,5 +62,15 @@ class TmdbApiService
     movies = JSON.parse(genre)["results"]
     movies.sort_by{|h| h['vote_average'].to_f}.reverse
   end
+
+  def self.call_movie(id)
+    response = RestClient.get "https://api.themoviedb.org/3/movie/#{id}?api_key=#{ENV['TMDB_KEY']}"
+    JSON.parse(response)
+  end
+
+  def self.call_movie_credits(id)
+    response = RestClient.get "https://api.themoviedb.org/3/movie/#{id}/credits?api_key=#{ENV['TMDB_KEY']}"
+    JSON.parse(response)
+  end
 end
 
