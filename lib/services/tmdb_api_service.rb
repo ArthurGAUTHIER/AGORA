@@ -84,7 +84,6 @@ class TmdbApiService
 
     def sort_by_duration
     d = serialize(@data)
-    p d
     response = RestClient.get "#{@base_url}discover/movie?api_key=#{@key}&#{d}&vote_count.gte=1"
     duration = JSON.parse(response)["results"]
     duration.sort_by{|h| h['vote_average'].to_f}.reverse

@@ -16,6 +16,7 @@ class MediaController < ApplicationController
   private
 
   def search_media
+    session.delete(:media)
     if !params[:q].blank? && !advanced_search?
       session[:media] = Medium.search_in_all(params[:q]).map { |m| m.id }
     elsif advanced_search?
@@ -32,7 +33,7 @@ class MediaController < ApplicationController
     actor_sort = TmdbApiService.new(params[:adv]).sort_by_actor unless params[:adv][:a].blank?
     director_sort = TmdbApiService.new(params[:adv]).sort_by_director unless params[:adv][:d].blank?
 
-    result = (category_sort + actor_sort + director_sort).uniq
+    result = (category_sort || [] + actor_sort || [] + director_sort || []).uniq
     media = []
     result.each do |movie|
       medium_found = Medium.find_by(title: movie['title'])
