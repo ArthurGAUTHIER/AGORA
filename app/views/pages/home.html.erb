@@ -1,25 +1,13 @@
 <div class="banner" style="background-image: radial-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url('<%= image_path 'background-cinema.jpg' %>');">
   <div class="banner-content">
-      <div class="text-center">
-        <br><br>
-        <h2 id="home-title" >How do you feelm?</h1>
-        <br>
-        <form action="<%= discover_path %>">
-          <div class="row">
-           <div class="col-md-6 col-md-offset-3">
-          <input type="text" name="q" placeholder="Genre, actor, duration ..." class="form-control">
-        </div>
-        </div>
-        <br>
-
-          <input type="submit" value="Search" class="btn-medium">
-
-          <div class="container">
-            <%= render 'components/adv_search' %>
-          </div>
-        </form>
-      </div>
+    <%= render 'components/card_home' %>
+    <br><br>
+    <button id='adv-search' class='btn-medium'>Advanced Search </button>
+    <div class="container adv-search" hidden>
+      <%= render 'components/adv_search' %>
+    </div>
   </div>
+</div>
 </div>
 <br>
   <div class="container">
@@ -44,3 +32,10 @@
 </div>
 
 
+<script>
+  element = document.getElementById('adv-search')
+  element.addEventListener('click', (event) => {
+  hidiv = document.getElementsByClassName('adv-search')[0]
+  hidiv.hidden = !hidiv.hidden
+});
+</script>

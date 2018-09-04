@@ -21,7 +21,7 @@ class MediaController < ApplicationController
     elsif advanced_search?
       session[:media] = call_api.map { |m| m.id }
     else
-      session[:media] = Medium.all.first(750).map { |m| m.id }
+      session[:media] = Medium.all.first(500).map { |m| m.id }
     end
   end
 

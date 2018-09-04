@@ -1,15 +1,17 @@
 .btn-medium{
 background-color: transparent;
 border-radius: 33px;
+border-color: $black;
 height: 50px;
 width: 120px;
 border: solid 3px #B4B4B4;
 padding: 0px;
-color: $white;
-vertical-align:middle
+color: $black;
+font-weight: bold;
+vertical-align: middle;
 }
 
 .btn-medium:hover{
-color: $grey;
-border: solid 2px $grey;
+color: $black;
+border: solid 2px $black;
 }
