@@ -141,7 +141,7 @@ ActiveRecord::Schema.define(version: 2018_09_03_134812) do
     t.bigint "medium_id"
     t.bigint "user_id"
     t.string "title"
-    t.string "description"
+    t.string "descritpion"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["medium_id"], name: "index_reviews_on_medium_id"

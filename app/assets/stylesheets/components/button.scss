@@ -1,0 +1,15 @@
+.btn-medium{
+background-color: transparent;
+border-radius: 33px;
+height: 50px;
+width: 120px;
+border: solid 3px #B4B4B4;
+padding: 0px;
+color: $white;
+vertical-align:middle
+}
+
+.btn-medium:hover{
+color: $grey;
+border: solid 2px $grey;
+}
