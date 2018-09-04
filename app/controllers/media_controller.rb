@@ -18,22 +18,32 @@ class MediaController < ApplicationController
   def search_media
     session.delete(:media)
     if !params[:q].blank? && !advanced_search?
-      session[:media] = Medium.search_in_all(params[:q]).map { |m| m.id }
+      session[:media] = simple_search_api.map { |m| m.id }.compact
     elsif advanced_search?
-      session[:media] = call_api.map { |m| m.id }
+      session[:media] = advanced_search_api.map { |m| m.id }.compact
     else
       session[:media] = Medium.all.first(500).map { |m| m.id }
     end
   end
 
-  def call_api
+  def simple_search_api
+    results = TmdbApiService.search(params[:q])
+    fetch_to_database(p results[:movie])
+  end
+
+  def advanced_search_api
     base_poster_url = 'http://image.tmdb.org/t/p/w500/'
 
+    query_sort = TmdbApiService.search(params[:q])[:movie] unless params[:q].blank?
     category_sort = TmdbApiService.new(params[:adv]).sort_by_genre unless params[:adv][:c].blank?
     actor_sort = TmdbApiService.new(params[:adv]).sort_by_actor unless params[:adv][:a].blank?
     director_sort = TmdbApiService.new(params[:adv]).sort_by_director unless params[:adv][:d].blank?
 
-    result = (category_sort || [] + actor_sort || [] + director_sort || []).uniq
+    result = (query_sort || [] + category_sort || [] + actor_sort || [] + director_sort || []).uniq
+    fetch_to_database(result)
+  end
+
+  def fetch_to_database(result)
     media = []
     result.each do |movie|
       medium_found = Medium.find_by(title: movie['title'])
