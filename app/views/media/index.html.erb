@@ -1,3 +1,4 @@
+<div id="medium-id" hidden><%= session[:media][@nb] %></div>
 <% if @nb > 0 %>
   <form action="<%= discover_path %>">
     <input type="submit" id="back" class="btn btn-lg btn-back" name="nb" value="<%= @nb - 1 %>"></input>

@@ -67,9 +67,9 @@
       <div class="container">
         <h1>ALREADY WATCHED</h1>
         <div class="row">
-          <% Library.all.where(already_watched: true).each do |instance| %>
+          <% Library.all.where(already_watched: true, user: current_user).each do |instance| %>
             <div class="col-xs-12 col-sm-3">
-              <%= render 'components/card', medium: instance.medium %>
+              <%= render 'components/card_dashboard', medium: instance.medium %>
             </div>
           <% end %>
         </div>
@@ -83,9 +83,9 @@
       <div class="container">
         <h1>WATCH LATER</h1>
         <div class="row">
-          <% Library.all.where(watch_later: true).each do |instance| %>
+          <% Library.all.where(watch_later: true, user: current_user).each do |instance| %>
             <div class="col-xs-12 col-sm-3">
-              <%= render 'components/card', medium: instance.medium %>
+              <%= render 'components/card_dashboard', medium: instance.medium %>
             </div>
           <% end %>
         </div>
@@ -99,9 +99,9 @@
       <div class="container">
         <h1>BLACKLIST</h1>
         <div class="row">
-          <% Library.all.where(blacklist: true).each do |instance| %>
+          <% Library.all.where(blacklist: true, user: current_user).each do |instance| %>
             <div class="col-xs-12 col-sm-3">
-              <%= render 'components/card', medium: instance.medium %>
+              <%= render 'components/card_dashboard', medium: instance.medium %>
             </div>
           <% end %>
         </div>

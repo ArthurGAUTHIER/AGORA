@@ -38,8 +38,12 @@
       </div>
     </div>
     <br>
-    <button class="btn btn-danger"><%= link_to "Dashboard", dashboard_path %></button>
-    <button class="btn btn-danger"><%= link_to "Discover", discover_path %></button>
+    <%= link_to dashboard_path do %>
+      <button class="btn btn-danger">Dashboard</button>
+    <% end %>
+    <%= link_to discover_path do%>
+      <button class="btn btn-danger">Discover</button>
+    <% end %>
   </div>
 </div>
 

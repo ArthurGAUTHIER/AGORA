@@ -3,36 +3,45 @@ import "bootstrap";
 
 console.log('Hello Libraries')
 
-const nb = parseInt(document.getElementById('next').value, 10) - 1
-
+const mediumId = parseInt(document.getElementById('medium-id').textContent, 10)
+console.log(mediumId);
 document.getElementById('blacklist').addEventListener('click', (event) => {
-  console_log('blacklist')
+  console.log('blacklist')
   sendData('blacklist')
 });
 
 document.getElementById('already_watched').addEventListener('click', (event) => {
+  console.log('already_watched')
   sendData('already_watched')
 });
 
 document.getElementById('watch_later').addEventListener('click', (event) => {
+  console.log('watch_later')
   sendData('watch_later')
 });
 
 
 const sendData = (bouton) => {
-  fetch(`/media/${nb}/libraries`, {
+  fetch(`/media/${mediumId}/libraries`, {
     method: 'POST',
-    headers: { 'Content-Type': 'app/JSON' },
+    headers: {
+      'Content-Type': 'app/JSON',
+      'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+    },
     body: createLibraryJSON(bouton)
+  }).then((response) => {
+    if (response.redirected) {
+      window.location.replace(response.url);
+    }
   });
 }
 
 const createLibraryJSON = (bouton) => {
-  JSON.stringify({
+  return JSON.stringify({
     "blacklist": bouton === 'blacklist',
     "already_watched": bouton === 'already_watched',
     "watch_later": bouton === 'watch_later'
-  })
+  });
 }
 
 
