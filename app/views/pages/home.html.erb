@@ -1,10 +1,19 @@
-<div class="banner" style="background-image: radial-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)),url('<%= image_path 'cinema.jpg' %>');">
+<div class="banner" style="background-image: radial-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url('<%= image_path 'background-cinema.jpg' %>');">
   <div class="banner-content">
       <div class="text-center">
-        <h1 id="home-title">HOW DO YOU FEELM ?</h1>
+        <br><br>
+        <h2 id="home-title" >How do you feelm?</h1>
+        <br>
         <form action="<%= discover_path %>">
-          <input type="text" name="q" placeholder="Genre, Actor, Director, Duration ...">
-          <input type="submit" value="Search">
+          <div class="row">
+           <div class="col-md-6 col-md-offset-3">
+          <input type="text" name="q" placeholder="Genre, actor, duration ..." class="form-control">
+        </div>
+        </div>
+        <br>
+
+          <input type="submit" value="Search" class="btn-medium">
+
           <div class="container">
             <%= render 'components/adv_search' %>
           </div>
