@@ -7,10 +7,10 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   resources :categories do
-    resources :preference_categories, only: [:create]
+    resources :preference_categories, only: [:create, :destroy]
   end
 
   resources :moods do
-    resources :preference_moods, only: [:create]
+    resources :preference_moods, only: [:create, :destroy]
   end
 end
