@@ -6,15 +6,16 @@ Rails.application.routes.draw do
 
   root to: 'pages#home'
 
+
   resources :media, only: [] do
     resources :libraries, only: [:create]
   end
 
   resources :categories, only: [] do
-    resources :preference_categories, only: [:create]
+    resources :preference_categories, only: [:create, :destroy]
   end
 
   resources :moods, only: [] do
-    resources :preference_moods, only: [:create]
+    resources :preference_moods, only: [:create, :destroy]
   end
 end

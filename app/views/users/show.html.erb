@@ -19,7 +19,8 @@
     <div role="tabpanel" class="tab-pane active" id="preferences">
       <h1>PREFERENCES</h1>
 
-      <div>Categories :
+      <div>
+        <h3>Categories : </h3>
         <div class="btn-group">
           <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add preferences <span class="caret"></span></button>
           <ul class="dropdown-menu">
@@ -29,14 +30,11 @@
             <% end %>
           </ul>
         </div><br><br>
-        <div>
-          <% PreferenceCategory.all.each do |instance| %>
-            <span class="label label-default"><%= instance.category.name + " " %><a><i class="fas fa-times"></i></a></span>
-          <% end %>
-        </div>
-      </div><br><br>
+        <%= render 'components/preference_category' %>
+      </div><br>
 
-      <div>Moods :
+      <div>
+        <h3>Moods : </h3>
         <div class="btn-group">
           <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add preferences <span class="caret"></span></button>
           <ul class="dropdown-menu">
@@ -46,19 +44,14 @@
             <% end %>
           </ul>
         </div><br><br>
-        <div>
-          <% PreferenceMood.all.each do |instance| %>
-            <span class="label label-default"><%= instance.mood.name + " " %><a><i class="fas fa-times"></i></a></span>
-          <% end %>
-        </div>
-      </div><br><br>
+        <%= render 'components/preference_mood' %>
+      </div><br>
 
-      <h3>Durations : <br>
-          <label for="adv[duration]"></label>
-          <div>
-            <input type="range" name="adv[duration]" multiple value="10,80">
-          </div>
-      </h3>
+      <h3>Durations : </h3><br>
+        <label for="adv[duration]"></label>
+        <div>
+          <input type="range" name="adv[duration]" multiple value="10,80">
+        </div>
     </div>
 
 
