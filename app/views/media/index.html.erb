@@ -1,12 +1,14 @@
 <div id="medium-id" hidden><%= session[:media][@nb] %></div>
 <% if @nb > 0 %>
   <form action="<%= discover_path %>">
-    <input type="submit" id="back" class="btn btn-lg btn-back" name="nb" value="<%= @nb - 1 %>"></input>
+    <input type="text" id="back" name="nb" value="<%= @nb - 1 %>" hidden></input>
+    <input type="submit" class="btn btn-lg btn-back" value="<<"></input>
   </form>
 <% end %>
 <% if @nb < session[:media].size - 1 %>
   <form action="<%= discover_path %>">
-    <input type="submit" id="next" class="btn btn-lg btn-next" name="nb" value="<%= @nb + 1 %>"></input>
+    <input type="text" id="next" name="nb" value="<%= @nb + 1 %>" hidden></input>
+    <input type="submit" class="btn btn-lg btn-next" value=">>"></input>
   </form>
 <% end %>
 
