@@ -2,6 +2,10 @@
   margin: 0 4px;
 }
 
-i {
+.label i {
   color: $white;
+}
+
+a:hover {
+  text-decoration: none;
 }

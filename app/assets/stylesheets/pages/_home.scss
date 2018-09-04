@@ -10,11 +10,28 @@
 
 .banner {
   text-align: center;
-  height: 110vh;
+  height: 130vh;
   background-size: cover !important;
   background-position: center;
   display: flex;
   align-items: top;
   padding-top: 40px;
   justify-content: center;
+}
+
+.icon-home i {
+  font-size: 150px;
+  color: $black;
+}
+
+.icon-home div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-item: center;
+  border-left: $red 1px;
+}
+
+.icon-home p {
+  text-align: justify;
 }
