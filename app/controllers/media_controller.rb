@@ -62,9 +62,9 @@ class MediaController < ApplicationController
     studio = find_studio(movie)
 
     medium.update(
-      poster: 'http://image.tmdb.org/t/p/w500/' << (movie['poster_path'].blank? ? '' : movie['poster_path']),
+      poster: (movie['poster_path'].blank? ? '' : 'http://image.tmdb.org/t/p/w500/' << movie['poster_path']),
       country: (movie['production_countries'].blank? ? nil : movie['production_countries'][0]['name']),
-      language: movie['orginal_language'],
+      language: movie['original_language'],
       studio: studio
       )
 
@@ -73,22 +73,22 @@ class MediaController < ApplicationController
 
   def store_in_database(movie)
     movie_credits = TmdbApiService.call_movie_credits(movie['id'])
-
+    p movie
     studio = find_studio(movie)
     categories = find_categories(movie)
     actors = find_actors(movie_credits['cast'])
     directors = find_directors(movie_credits['crew'])
 
     medium = Medium.create(
-      poster: 'http://image.tmdb.org/t/p/w500/' << (movie['poster_path'].blank? ? '' : movie['poster_path']),
+      poster: (movie['poster_path'].blank? ? '' : 'http://image.tmdb.org/t/p/w500/' << movie['poster_path']),
       title: movie['title'],
       synopsys: movie['overview'],
       duration: movie['runtime'],
-      year: movie['release_date'].match(/\d{4}/)[0],
+      year: (movie['release_date'].blank? ? '' : movie['release_date'].match(/\d{4}/)[0]),
       country: (movie['production_countries'].blank? ? nil : movie['production_countries'][0]['name']),
       press_rating: movie['vote_average'], # TODO: use IMDB for rating
       audience_rating: movie['vote_average'],
-      language: movie['orginal_language'],
+      language: movie['original_language'],
       studio: studio
       )
     medium.categories = categories
@@ -137,7 +137,7 @@ class MediaController < ApplicationController
       Actor.where(last_name: last_name).each do |actor_family|
         if actor_family.first_name == first_name
           actor = actor_family
-          actor.update(photo: 'http://image.tmdb.org/t/p/w500/' << (person[:photo].blank? ? '' : person[:photo]))
+          actor.update(photo: (person[:photo].blank? ? '' : 'http://image.tmdb.org/t/p/w500/' << person[:photo]))
         end
       end
 
@@ -145,7 +145,7 @@ class MediaController < ApplicationController
         actor = Actor.create(
           first_name: first_name,
           last_name: last_name,
-          photo: 'http://image.tmdb.org/t/p/w500/' << (person[:photo].blank? ? '' : person[:photo])
+          photo: (person[:photo].blank? ? '' : 'http://image.tmdb.org/t/p/w500/' << person[:photo])
           )
       end
       actors << actor
@@ -174,7 +174,7 @@ class MediaController < ApplicationController
       Director.where(last_name: last_name).each do |director_family|
         if director_family.first_name == first_name
           director = director_family
-          director.update(photo: 'http://image.tmdb.org/t/p/w500/' << (person[:photo].blank? ? '' : person[:photo]))
+          director.update(photo: (person[:photo].blank? ? '' : 'http://image.tmdb.org/t/p/w500/' <<  person[:photo]))
         end
       end
 
@@ -182,7 +182,7 @@ class MediaController < ApplicationController
         director = Director.create(
           first_name: first_name,
           last_name: last_name,
-          photo: 'http://image.tmdb.org/t/p/w500/' + (person[:photo].blank? ? '' : person[:photo])
+          photo: (person[:photo].blank? ? '' : 'http://image.tmdb.org/t/p/w500/' << person[:photo])
           )
       end
       directors << director

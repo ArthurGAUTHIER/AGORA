@@ -27,11 +27,11 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="text-center">
-          <div id="blacklist" class="btn btn-lg btn-danger">Blacklist</div>
-          <span class="spacer"></span>
           <div id="already_watched" class="btn btn-lg btn-danger">Already watched</div>
           <span class="spacer"></span>
           <div id="watch_later" class="btn btn-lg btn-danger">Watch later</div>
+          <span class="spacer"></span>
+          <div id="blacklist" class="btn btn-lg btn-danger">Blacklist</div>
         </div>
       </div>
     </div>
@@ -100,11 +100,11 @@
           <div class="row">
             <% counter = 0 %>
             <% @medium.actors.reverse.each do |actor| %>
-                <% unless actor.photo.nil? || counter >= 4 %>
+                <% unless counter >= 4 %>
                   <% counter += 1 %>
                   <div class="col-xs-3">
                     <div class="text-center">
-                      <%= image_tag actor.photo, width: 80 %>
+                      <%= image_tag (actor.photo.blank? ? 'blank-avatar.png' : actor.photo), width: 80 %>
                       <p><%= actor.full_name %></p>
                     </div>
                   </div>
@@ -139,7 +139,7 @@
               <% @medium.directors.reverse.each do |director| %>
               <div class="col-xs-3">
                 <div class="text-center">
-                  <%= image_tag (director.photo.nil? ? 'blank-avatar.png' : director.photo), width: 80 %>
+                  <%= image_tag (director.photo.blank? ? 'blank-avatar.png' : director.photo), width: 80 %>
                   <p><%= director.full_name %></p>
                 </div>
               </div>

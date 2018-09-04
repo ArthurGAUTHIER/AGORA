@@ -98,11 +98,21 @@ class TmdbApiService
         tv_results << result
       end
 
-      person_results.each do |person|
-        if person['known_for']['media_type'] == 'movie'
-          movie_results << person['known_for']
+      person_results.each do |pers|
+        if pers['known_for'].is_a? Array
+          pers['known_for'].each do |video|
+            if video['media_type'] == 'movie'
+              movie_results << pers['known_for']
+            else
+              tv_results << pers['known_for']
+            end
+          end
         else
-          tv_results << person['known_for']
+          if pers['known_for']['media_type'] == 'movie'
+            movie_results << pers['known_for']
+          else
+            tv_results << pers['known_for']
+          end
         end
       end
     end
