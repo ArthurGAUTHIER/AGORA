@@ -1,0 +1,9 @@
+<div>
+  <% PreferenceMood.all.each do |instance| %>
+    <span class="label label-default"><%= instance.mood.name + " " %>
+      <%= link_to  mood_preference_mood_path(instance.mood_id, instance.id), method: :delete do %>
+        <i class="fas fa-times"></i>
+      <% end %>
+    </span><span class='chip'></span>
+  <% end %>
+</div>
