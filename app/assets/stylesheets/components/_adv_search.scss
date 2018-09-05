@@ -1,18 +1,23 @@
 .card-adv-search {
-  margin-left: 70px;
-  margin-right: 70px;
-  padding: 30px;
-  color: white;
-  text-shadow: 1px 1px 10px rgba(0,0,0,0.8)
-}
-
-#card-adv-search {
+  padding: 20px;
   background-color: white;
-  opacity: .8;
-  width: 700px;
-  height: 320px;
+  // opacity: .9;
+  width: 750px;
+  height: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 15px;
+}
+
+.custom {
+  display: flex;
+}
+
+.custom input {
+  margin: 12px;
+}
+
+.custom label {
+  margin: 20px
 }
