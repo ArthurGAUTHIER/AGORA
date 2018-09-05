@@ -18,4 +18,7 @@ Rails.application.routes.draw do
   resources :moods, only: [] do
     resources :preference_moods, only: [:create, :destroy]
   end
+
+  resources :topics, only: [:index, :create, :show, :destroy]
+  resources :comments, only: [:create, :destroy]
 end
