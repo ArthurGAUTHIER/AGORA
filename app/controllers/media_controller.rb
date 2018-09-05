@@ -195,10 +195,8 @@ class MediaController < ApplicationController
       !(
         params[:adv][:c].blank? &&
         params[:adv][:mood].blank? &&
-        params[:adv][:country].blank? &&
         params[:adv][:a].blank? &&
         params[:adv][:d].blank? &&
-        params[:adv][:studio].blank? &&
         params[:adv][:seen].nil? &&
         params[:adv][:recent].nil? &&
         params[:adv][:netflix].nil? &&
