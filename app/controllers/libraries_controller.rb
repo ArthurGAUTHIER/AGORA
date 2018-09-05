@@ -1,8 +1,8 @@
 class LibrariesController < ApplicationController
   def create
     data = JSON.parse(request.body.read)
-    p data
     not_in_library = true
+
     current_user.libraries.each do |library|
       medium = Medium.find(params[:medium_id])
       if library.medium == medium
