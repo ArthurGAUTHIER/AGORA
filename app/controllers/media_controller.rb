@@ -28,7 +28,7 @@ class MediaController < ApplicationController
 
   def simple_search_api
     results = TmdbApiService.search(params[:q])
-    fetch_to_database(p results[:movie])
+    fetch_to_database(results[:movie].uniq)
   end
 
   def advanced_search_api
