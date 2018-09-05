@@ -82,14 +82,53 @@ class TmdbApiService
     JSON.parse(response)
   end
 
-    def sort_by_duration
+  def self.search(query)
+    movie_results = []
+    tv_results = []
+    person_results = []
+
+    response = RestClient.get "https://api.themoviedb.org/3/search/multi?api_key=#{ENV['TMDB_KEY']}&query=#{query}"
+    JSON.parse(response)['results'].each do |result|
+      if result['media_type'] == 'person'
+        person_results << result
+      elsif result['media_type'] == 'movie'
+        movie_results << result
+      else
+        tv_results << result
+      end
+
+      person_results.each do |pers|
+        if pers['known_for'].is_a? Array
+          pers['known_for'].each do |video|
+            if video['media_type'] == 'movie'
+              movie_results << video
+            else
+              tv_results << video
+            end
+          end
+        else
+          if pers['known_for']['media_type'] == 'movie'
+            movie_results << pers['known_for']
+          else
+            tv_results << pers['known_for']
+          end
+        end
+      end
+    end
+    {
+      movie: movie_results.sort_by{|h| h['vote_average'].to_f}.reverse,
+      tv: tv_results.sort_by{|h| h['vote_average'].to_f}.reverse
+     }
+  end
+
+  def sort_by_duration
     d = serialize(@data)
     response = RestClient.get "#{@base_url}discover/movie?api_key=#{@key}&#{d}&vote_count.gte=1"
     duration = JSON.parse(response)["results"]
     duration.sort_by{|h| h['vote_average'].to_f}.reverse
   end
 
-    def sort_by_year
+  def sort_by_year
     y = serialize(@data)
     response = RestClient.get "#{@base_url}discover/movie?api_key=#{@key}&#{y}"
     year = JSON.parse(response)["results"]

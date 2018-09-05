@@ -1,39 +1,40 @@
 <div class="banner" style="background-image: radial-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)),url('<%= image_path 'redseat.jpg' %>');">
   <div class="banner-content">
-    <%= render 'components/card_home' %>
+    <div>
+      <%= render 'components/card_home' %>
+    </div>
     <br><br>
-    <button id='adv-search' class='btn-medium'>Advanced Search </button>
     <div class="container adv-search" hidden>
       <%= render 'components/adv_search' %>
     </div>
   </div>
 </div>
-</div>
-<br>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-5">
-        <h3>AGORA c'est quoi ?</h3>
-        <p> Constatant l'incapacité des sites de streaming à proposer un contenu adapté à chaque spectateur nous avons décider de proposer une solution permettant à chacun de trouver son bonheur ou du moins un bon film ;)</p>
-        <p>Arrivé sur la plateforme vous pouvez ajouter vos préférences ou envies du moment et vous laisser guider vers le contenu qui vous correspond !</p>
-        <p>Finis le scrolling et les lectures de synopsis interminables, désormais en quelques clics vous pourrez créer votre moment et vous concentrer sur les choses qui comptent.</p>
-        <p>Bien sûr AGORA c'est plus que ça, vous pourrez intégrer cette belle communauté qu'est l'AGORA club afin d'échanger vos avis  noter les contenus, gérer votre cinémathèque et pleins d'autres fonctionnalités qu'il vous incombe de découvrir !</p>
-        <p>Happy streaming :)</p>
-      </div>
-      <div class="col-sm-7">
-        <br><br>
-        <%= image_tag('popcorn.jpg', height: 500, width: 700, crop: :fill) %>
+
+<br><br>
+<div class="container">
+  <div class="row icon-home">
+    <div class="col-sm-4">
+      <div class='text-center'>
+        <i class="fas fa-stopwatch"></i>
+      </div><br>
+      <p>Vous en avez marre de mettre des heures à chercher du contenu, en quelques clics chacun peut trouver son bonheur ou du moins un bon film !</p>
+    </div>
+    <div class="col-sm-4">
+      <p>Nous proposons un contenu adapté à chaque spectateur, vous pouvez ajouter vos préférences ou envies du moment et vous laisser guider vers le contenu qui vous correspond !</p><br>
+      <div class='text-center'>
+        <i class="fas fa-pencil-alt"></i>
       </div>
     </div>
-    <br>
-    <%= link_to dashboard_path do %>
-      <button class="btn btn-danger">Dashboard</button>
-    <% end %>
-    <%= link_to discover_path do%>
-      <button class="btn btn-danger">Discover</button>
-    <% end %>
+    <div class="col-sm-4">
+      <div class='text-center'>
+        <i class="far fa-comments"></i>
+      </div><br>
+      <p>Mais c'est plus que ça, vous pourrez intégrer cette belle communauté qu'est l'AGORA club afin d'échanger vos avis, noter les contenus, gérer votre cinémathèque et pleins d'autres fonctionnalités !</p>
+    </div>
   </div>
 </div>
+<br><br>
+
 
 
 <script>

@@ -1,12 +1,14 @@
 <div id="medium-id" hidden><%= session[:media][@nb] %></div>
 <% if @nb > 0 %>
   <form action="<%= discover_path %>">
-    <input type="submit" id="back" class="btn btn-lg btn-back" name="nb" value="<%= @nb - 1 %>"></input>
+    <input type="text" id="back" name="nb" value="<%= @nb - 1 %>" hidden></input>
+    <input type="submit" class="btn btn-lg btn-back" value="<<"></input>
   </form>
 <% end %>
 <% if @nb < session[:media].size - 1 %>
   <form action="<%= discover_path %>">
-    <input type="submit" id="next" class="btn btn-lg btn-next" name="nb" value="<%= @nb + 1 %>"></input>
+    <input type="text" id="next" name="nb" value="<%= @nb + 1 %>" hidden></input>
+    <input type="submit" class="btn btn-lg btn-next" value=">>"></input>
   </form>
 <% end %>
 
@@ -25,11 +27,11 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="text-center">
-          <div id="blacklist" class="btn btn-lg btn-danger">Blacklist</div>
-          <span class="spacer"></span>
           <div id="already_watched" class="btn btn-lg btn-danger">Already watched</div>
           <span class="spacer"></span>
           <div id="watch_later" class="btn btn-lg btn-danger">Watch later</div>
+          <span class="spacer"></span>
+          <div id="blacklist" class="btn btn-lg btn-danger">Blacklist</div>
         </div>
       </div>
     </div>
@@ -98,11 +100,11 @@
           <div class="row">
             <% counter = 0 %>
             <% @medium.actors.reverse.each do |actor| %>
-                <% unless actor.photo.nil? || counter >= 4 %>
+                <% unless counter >= 4 %>
                   <% counter += 1 %>
                   <div class="col-xs-3">
                     <div class="text-center">
-                      <%= image_tag actor.photo, width: 80 %>
+                      <%= image_tag (actor.photo.blank? ? 'blank-avatar.png' : actor.photo), width: 80 %>
                       <p><%= actor.full_name %></p>
                     </div>
                   </div>
@@ -137,7 +139,7 @@
               <% @medium.directors.reverse.each do |director| %>
               <div class="col-xs-3">
                 <div class="text-center">
-                  <%= image_tag (director.photo.nil? ? 'blank-avatar.png' : director.photo), width: 80 %>
+                  <%= image_tag (director.photo.blank? ? 'blank-avatar.png' : director.photo), width: 80 %>
                   <p><%= director.full_name %></p>
                 </div>
               </div>
