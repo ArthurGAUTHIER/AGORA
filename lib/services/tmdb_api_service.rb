@@ -91,7 +91,6 @@ class TmdbApiService
     JSON.parse(response)['results'].each do |result|
       if result['media_type'] == 'person'
         person_results << result
-
       elsif result['media_type'] == 'movie'
         movie_results << result
       else
@@ -102,9 +101,9 @@ class TmdbApiService
         if pers['known_for'].is_a? Array
           pers['known_for'].each do |video|
             if video['media_type'] == 'movie'
-              movie_results << pers['known_for']
+              movie_results << video
             else
-              tv_results << pers['known_for']
+              tv_results << video
             end
           end
         else
@@ -118,7 +117,7 @@ class TmdbApiService
     end
     {
       movie: movie_results.sort_by{|h| h['vote_average'].to_f}.reverse,
-      tv: tv_results.sort_by{|h| h['vote_average'].to_f}.reverse,
+      tv: tv_results.sort_by{|h| h['vote_average'].to_f}.reverse
      }
   end
 
