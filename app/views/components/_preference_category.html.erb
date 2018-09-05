@@ -1,9 +1,9 @@
 <div>
   <% PreferenceCategory.all.each do |instance| %>
-    <span class="label label-default"><%= instance.category.name + " " %>
+    <span class="label label-default chip"><%= instance.category.name + " " %>
       <%= link_to category_preference_category_path(instance.category_id, instance.id), method: :delete do %>
         <i class="fas fa-times"></i>
       <% end %>
-    </span><span class='chip'></span>
+    </span>
   <% end %>
 </div>
