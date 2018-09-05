@@ -14,7 +14,7 @@
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="preferences">
           <div>
-            <h3>Categories : </h3>
+            <h4>Categories : </h4>
             <div class="btn-group">
               <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add preferences <span class="caret"></span></button>
               <ul class="dropdown-menu">
@@ -27,7 +27,7 @@
             <%= render 'components/preference_category' %>
           </div><br>
           <div>
-            <h3>Moods : </h3>
+            <h4>Moods : </h4>
             <div class="btn-group">
               <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add preferences <span class="caret"></span></button>
               <ul class="dropdown-menu">
@@ -39,7 +39,7 @@
             </div><br><br>
             <%= render 'components/preference_mood' %>
           </div><br>
-          <h3>Durations : </h3>
+          <h4>Durations : </h4>
           <label for="adv[duration]"></label>
           <div>
             <input type="range" name="adv[duration]" multiple value="10,80" min="0" max="300" oninput="adv[duration].value" step="10" >

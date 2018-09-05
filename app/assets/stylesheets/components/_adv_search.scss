@@ -8,6 +8,8 @@
   flex-direction: column;
   align-items: center;
   border-radius: 15px;
+  animation-name: example;
+  animation-duration: 1s;
 }
 
 .custom {
@@ -21,3 +23,9 @@
 .custom label {
   margin: 20px
 }
+
+@keyframes example {
+    from {opacity:0;}
+    to {opacity:1;}
+}
+
