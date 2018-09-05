@@ -1,35 +1,36 @@
 #card-home {
-    background-color: white;
-    opacity: .8;
-    width: 700px;
-    height: 450px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 80px;
-    margin-left: 60px;
-    margin-right: 60px;
-    border-radius: 15px;
+  background-color: white;
+  opacity: .8;
+  width: 700px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
 }
 
 .card-home {
-    display: flex;
-    height: 150px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    background-size: cover !important;
-    background-position: center;
-    background-color: white;
-    color: black;
-    margin: 10px 0px;
-    border-radius: 2px;
+  display: flex;
+  height: 150px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  background-size: cover !important;
+  background-position: center;
+  background-color: white;
+  color: black;
+  margin:  100px auto auto auto;
+  border-radius: 2px;
 }
 
-i {
+.card-home i {
   height: 20px;
   width: 24px;
   color: red;
 }
 
-div {
-  border: red 2px;
+.card-home p {
+  margin-bottom: -5px;
+}
+
+.card-adv-search {
+  margin:  auto auto auto auto;
 }

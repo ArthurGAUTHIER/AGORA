@@ -2,6 +2,20 @@
   margin: 0 4px;
 }
 
-i {
+.label i {
   color: $white;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.background-preference {
+  background-color: #FBFFFE;
+  padding: 20px;
+  opacity:0.8;
+  margin-top: 50px;
+  font-family: Roboto, Helvetica, sans-serif;
+  border-radius: 9px;
+  box-shadow: 10px 5px 5px $red;
 }
