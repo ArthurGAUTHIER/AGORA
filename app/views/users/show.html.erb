@@ -1,121 +1,109 @@
 <div class="banner" style="background-image: radial-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url('<%= image_path 'background-cinema.jpg' %>');">
-<br><br><br><br><br><br><br>
-
-<div class="container">
-  <div class="background-preference">
-  <div class="tab in-line">
-    <ul class="nav nav-tabs" role="tablist">
-      <li id="preferences-title" role="presentation" class="active"><a id="preferences-title-design"  class="tab" href="#preferences" aria-controls="preferences" role="tab" data-toggle="tab">PREFERENCES</a></li>
-      <li id="already_watched-title" role="presentation"><a id="already_watched-title-design"  class="tab" href="#already_watched" aria-controls="already_watched" role="tab" data-toggle="tab">ALREADY WATCH</a></li>
-      <li id="watch-later-title" role="presentation"><a id="watch-later-title-design" class="tab"  href="#watch-later" aria-controls="watch-later" role="tab" data-toggle="tab">WATCH LATER</a></li>
-      <li id="blacklist-title" role="presentation"><a id="blacklist-title-design"  class="tab" href="#blacklist" aria-controls="blacklist" role="tab" data-toggle="tab">BLACKLIST</a></li>
-      <li id="profile-title" role="presentation"><a id="profile-title-design"  class="tab" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">PROFILE</a></li>
-    </ul>
-  </div>
-
-
-  <div class="tab-content">
-
-
-    <div role="tabpanel" class="tab-pane active" id="preferences">
-      <h2>PREFERENCES</h2>
-      <div>
-        <h4>Categories : </h4>
-        <div class="btn-group">
-          <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add preferences <span class="caret"></span></button>
-          <ul class="dropdown-menu">
-            <% Category.all.each do |instance| %>
-              <li><%= link_to instance.name, category_preference_categories_path(instance.id), method: :post %></li>
-              <li role="separator" class="divider"></li>
-            <% end %>
-          </ul>
-        </div><br><br>
-        <%= render 'components/preference_category' %>
-      </div><br>
-      <div>
-        <h4>Moods : </h4>
-        <div class="btn-group">
-          <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add preferences <span class="caret"></span></button>
-          <ul class="dropdown-menu">
-            <% Mood.all.each do |instance| %>
-              <li><%= link_to instance.name, mood_preference_moods_path(instance.id), method: :post %></li>
-              <li role="separator" class="divider"></li>
-            <% end %>
-          </ul>
-        </div><br><br>
-        <%= render 'components/preference_mood' %>
-      </div><br>
-      <h4>Durations : </h4>
-        <label for="adv[duration]"></label>
-        <div>
-          <input type="range" name="adv[duration]" multiple value="10,80" min="0" max="300" oninput="adv[duration].value" step="10" >
-        </div>
-    </div>
-
-
-
-    <div role="tabpanel" class="tab-pane" id="already_watched">
-      <div class="container">
-        <h2>ALREADY WATCHED</h2>
-        <div class="row">
-          <% Library.all.where(already_watched: true, user: current_user).each do |instance| %>
-            <div class="col-xs-12 col-sm-3">
-              <%= render 'components/card_dashboard', medium: instance.medium %>
-            </div>
-          <% end %>
-        </div>
+  <br><br><br><br><br><br><br>
+  <div class="container">
+    <div class="background-preference">
+      <div class="tab in-line">
+        <ul class="nav nav-tabs" role="tablist">
+          <li id="preferences-title" role="presentation" class="active"><a id="preferences-title-design"  class="tab" href="#preferences" aria-controls="preferences" role="tab" data-toggle="tab">PREFERENCES</a></li>
+          <li id="already_watched-title" role="presentation"><a id="already_watched-title-design"  class="tab" href="#already_watched" aria-controls="already_watched" role="tab" data-toggle="tab">ALREADY WATCH</a></li>
+          <li id="watch-later-title" role="presentation"><a id="watch-later-title-design" class="tab"  href="#watch-later" aria-controls="watch-later" role="tab" data-toggle="tab">WATCH LATER</a></li>
+          <li id="blacklist-title" role="presentation"><a id="blacklist-title-design"  class="tab" href="#blacklist" aria-controls="blacklist" role="tab" data-toggle="tab">BLACKLIST</a></li>
+          <li id="profile-title" role="presentation"><a id="profile-title-design"  class="tab" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">PROFILE</a></li>
+        </ul>
       </div>
-      <br>
-    </div>
-
-
-
-    <div role="tabpanel" class="tab-pane" id="watch-later">
-      <div class="container">
-        <h2>WATCH LATER</h2>
-        <div class="row">
-          <% Library.all.where(watch_later: true, user: current_user).each do |instance| %>
-            <div class="col-xs-12 col-sm-3">
-              <%= render 'components/card_dashboard', medium: instance.medium %>
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="preferences">
+          <div>
+            <h3>Categories : </h3>
+            <div class="btn-group">
+              <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add preferences <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <% Category.all.each do |instance| %>
+                  <li><%= link_to instance.name, category_preference_categories_path(instance.id), method: :post %></li>
+                  <li role="separator" class="divider"></li>
+                <% end %>
+              </ul>
+            </div><br><br>
+            <%= render 'components/preference_category' %>
+          </div><br>
+          <div>
+            <h3>Moods : </h3>
+            <div class="btn-group">
+              <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add preferences <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <% Mood.all.each do |instance| %>
+                  <li><%= link_to instance.name, mood_preference_moods_path(instance.id), method: :post %></li>
+                  <li role="separator" class="divider"></li>
+                <% end %>
+              </ul>
+            </div><br><br>
+            <%= render 'components/preference_mood' %>
+          </div><br>
+          <h3>Durations : </h3>
+          <label for="adv[duration]"></label>
+          <div>
+            <input type="range" name="adv[duration]" multiple value="10,80" min="0" max="300" oninput="adv[duration].value" step="10" >
+          </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="already_watched">
+          <div class="container">
+            <div class="row">
+              <% Library.all.where(already_watched: true, user: current_user).each do |instance| %>
+                <div class="col-xs-12 col-sm-3">
+                  <%= render 'components/card_dashboard', medium: instance.medium %>
+                </div>
+              <% end %>
             </div>
-          <% end %>
+          </div>
+          <br>
         </div>
-      </div>
-      <br>
-    </div>
-
-
-
-    <div role="tabpanel" class="tab-pane" id="blacklist">
-      <div class="container">
-        <h2>BLACKLIST</h2>
-        <div class="row">
-          <% Library.all.where(blacklist: true, user: current_user).each do |instance| %>
-            <div class="col-xs-12 col-sm-3">
-              <%= render 'components/card_dashboard', medium: instance.medium %>
+        <div role="tabpanel" class="tab-pane" id="watch-later">
+          <div class="container">
+            <div class="row">
+              <% Library.all.where(watch_later: true, user: current_user).each do |instance| %>
+                <div class="col-xs-12 col-sm-3">
+                  <%= render 'components/card_dashboard', medium: instance.medium %>
+                </div>
+              <% end %>
             </div>
-          <% end %>
+          </div>
+          <br>
         </div>
-      </div>
-      <br>
-    </div>
-
-
-
-    <div role="tabpanel" class="tab-pane" id="profile">
-      <div class="container">
-        <h2>PROFILE</h2>
-        <div class="col-xs-3 col-sm-4">
-          <%= cl_image_tag current_user.photo %> <br>
+        <div role="tabpanel" class="tab-pane" id="blacklist">
+          <div class="container">
+            <div class="row">
+              <% Library.all.where(blacklist: true, user: current_user).each do |instance| %>
+                <div class="col-xs-12 col-sm-3">
+                  <%= render 'components/card_dashboard', medium: instance.medium %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <br>
         </div>
-        <div class="col-xs-3 col-sm-4">
-          <%= current_user.alias %> <br><br>
-          <%= current_user.email %> <br><br>
-          <input type="submit" name="commit" value="Update profile" class="btn btn-default btn buton-profile" data-disable-with="Update Profile">
+        <div role="tabpanel" class="tab-pane" id="profile">
+          <div class="container">
+            <div class="col-xs-3 col-sm-4">
+              <%= cl_image_tag current_user.photo %><br>
+            </div>
+            <div class="col-xs-3 col-sm-4">
+              <%= current_user.alias %><br><br>
+              <%= current_user.email %><br><br>
+            </div>
+          </div>
+          <div>
+            <ul>
+              <li>Number of content already watched : <%= @media_count %></li>
+              <li>Time spent watching contents : <%= @time_spent %></li>
+              <li>Average duration of thoses contents : <%= @average_duration %></li>
+              <li>Favorite category : <%= @favorite_category %></li>
+              <li>Favorite actor : <%= @favorite_actor %></li>
+              <li>Favorite director : <%= @favorite_director %></li>
+              <li>Favorite studio : <%= @favorite_studio %></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-</div>
 </div>
