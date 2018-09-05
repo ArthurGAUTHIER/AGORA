@@ -12,4 +12,10 @@
 }
 .alert-warning {
   background: $red;
+  opacity:0.2;
+}
+
+.alert-dismissible {
+  border-width: 0px;
+  border-radius: 0px;
 }
