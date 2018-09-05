@@ -39,7 +39,7 @@ class MediaController < ApplicationController
     actor_sort = TmdbApiService.new(params[:adv]).sort_by_actor unless params[:adv][:a].blank?
     director_sort = TmdbApiService.new(params[:adv]).sort_by_director unless params[:adv][:d].blank?
 
-    result = (query_sort || [] + category_sort || [] + actor_sort || [] + director_sort || []).uniq
+    result = ((query_sort || []) + (category_sort || []) + (actor_sort || []) + (director_sort || [])).uniq
     fetch_to_database(result)
   end
 
