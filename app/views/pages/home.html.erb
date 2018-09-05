@@ -1,12 +1,15 @@
-
-<div class="banner" style="background-image: radial-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('<%= image_path 'background-cinema.jpg' %>');">
+<div class="banner" style="background-image: radial-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)),url('<%= image_path 'redseat.jpg' %>');">
   <div class="banner-content">
     <div>
-      <%= render 'components/card_home' %>
-    </div>
-    <br><br>
-    <div class="container adv-search" hidden>
-      <%= render 'components/adv_search' %>
+      <form action="<%= discover_path %>" class="color-grey">
+        <div>
+          <%= render 'components/card_home' %>
+        </div>
+        <br><br>
+        <div class="container adv-search" hidden>
+          <%= render 'components/adv_search' %>
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -18,10 +21,10 @@
       <div class='text-center'>
         <i class="fas fa-stopwatch"></i>
       </div><br>
-      <p>Vous en avez marre de mettre des heures à chercher du contenu, en quelques clics chacun peut trouver son bonheur ou du moins un bon film !</p>
+      <p>Vous en avez marre de mettre des heures à chercher du contenu? En quelques clics, chacun peut trouver son bonheur ou du moins un bon film !</p>
     </div>
     <div class="col-sm-4">
-      <p>Nous proposons un contenu adapté à chaque spectateur, vous pouvez ajouter vos préférences ou envies du moment et vous laisser guider vers le contenu qui vous correspond !</p><br>
+      <p>Nous proposons un contenu adapté à chaque spectateur. Vous pouvez ajouter vos préférences ou envies du moment et vous laisser guider vers le contenu qui vous correspond !</p><br>
       <div class='text-center'>
         <i class="fas fa-pencil-alt"></i>
       </div>
@@ -30,7 +33,7 @@
       <div class='text-center'>
         <i class="far fa-comments"></i>
       </div><br>
-      <p>Mais c'est plus que ça, vous pourrez intégrer cette belle communauté qu'est l'AGORA club afin d'échanger vos avis, noter les contenus, gérer votre cinémathèque et pleins d'autres fonctionnalités !</p>
+      <p>Mais c'est plus que ça, vous pourrez intégrer cette belle communauté qu'est l'AGORA club afin d'échanger vos avis, noter les contenus, gérer votre cinémathèque et plein d'autres fonctionnalités !</p>
     </div>
   </div>
 </div>
@@ -41,7 +44,7 @@
 <script>
   element = document.getElementById('adv-search')
   element.addEventListener('click', (event) => {
-  hidiv = document.getElementsByClassName('adv-search')[0]
-  hidiv.hidden = !hidiv.hidden
-});
+    hidiv = document.getElementsByClassName('adv-search')[0]
+    hidiv.hidden = !hidiv.hidden
+  });
 </script>

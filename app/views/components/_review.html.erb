@@ -1,0 +1,19 @@
+<div class="message">
+  <div class="message-avatar">
+    <div class="text-center">
+      <% if current_user.nil? || current_user.photo.blank? %>
+        <%= image_tag "blank-avatar.png", :width=>70, :height=>70 %>
+      <% else %>
+        <%= cl_image_tag review.user.photo, class: 'img-circle', :gravity=>"face", :width=>70, :height=>70, :crop=>"thumb" %>
+      <% end %>
+      <p><%= review.user.alias %></p>
+    </div>
+  </div>
+  <div class="message-name">
+    <h3><strong><%= review.title %></strong></h3>
+    <p><%= review.created_at %></p>
+  </div>
+  <div class="message-body">
+    <p><strong><%= review.description %></strong></p>
+  </div>
+</div>
