@@ -1,7 +1,8 @@
-
-<br><br><br><br><br>
+<div class="banner" style="background-image: radial-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url('<%= image_path 'background-cinema.jpg' %>');">
+<br><br><br><br><br><br><br>
 
 <div class="container">
+  <div class="background-preference">
   <div class="tab in-line">
     <ul class="nav nav-tabs" role="tablist">
       <li id="preferences-title" role="presentation" class="active"><a id="preferences-title-design"  class="tab" href="#preferences" aria-controls="preferences" role="tab" data-toggle="tab">PREFERENCES</a></li>
@@ -47,7 +48,7 @@
       <h3>Durations : </h3>
         <label for="adv[duration]"></label>
         <div>
-          <input type="range" name="adv[duration]" multiple value="10,80">
+          <input type="range" name="adv[duration]" multiple value="10,80" min="0" max="300" oninput="adv[duration].value" step="10" >
         </div>
     </div>
 
@@ -115,4 +116,6 @@
       </div>
     </div>
   </div>
+</div>
+</div>
 </div>
