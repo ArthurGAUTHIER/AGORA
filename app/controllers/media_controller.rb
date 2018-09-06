@@ -114,15 +114,15 @@ class MediaController < ApplicationController
     directors = find_directors(movie_credits['crew'])
 
     medium = Medium.create(
-      tmdbid: movie['id'],
+      tmdbid: movie['id'].to_i,
       poster: (movie['poster_path'].blank? ? '' : 'http://image.tmdb.org/t/p/w500/' << movie['poster_path']),
       title: movie['title'],
       synopsys: movie['overview'],
-      duration: movie['runtime'],
-      year: (movie['release_date'].blank? ? '' : movie['release_date'].match(/\d{4}/)[0]),
+      duration: movie['runtime'].to_i,
+      year: (movie['release_date'].blank? ? '' : movie['release_date'].match(/\d{4}/)[0].to_i),
       country: (movie['production_countries'].blank? ? nil : movie['production_countries'][0]['name']),
-      press_rating: movie['vote_average'], # TODO: use IMDB for rating
-      audience_rating: movie['vote_average'],
+      press_rating: movie['vote_average'].to_f, # TODO: use IMDB for rating
+      audience_rating: movie['vote_average'].to_f,
       language: movie['original_language'],
       studio: studio
       )
