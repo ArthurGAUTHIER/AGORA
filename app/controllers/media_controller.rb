@@ -38,7 +38,7 @@ class MediaController < ApplicationController
     end
 
     movies_sorted = movies.group_by{|x| x}.sort_by{|k, v| -v.size}.map(&:first)
-    
+
     session[:media] = fetch_to_database(movies_sorted).map { |m| m.id }.compact
     redirect_to discover_path
   end
@@ -108,13 +108,13 @@ class MediaController < ApplicationController
 
   def store_in_database(movie)
     movie_credits = TmdbApiService.call_movie_credits(movie['id'])
-    p movie
     studio = find_studio(movie)
     categories = find_categories(movie)
     actors = find_actors(movie_credits['cast'])
     directors = find_directors(movie_credits['crew'])
 
     medium = Medium.create(
+      tmdbid: movie['id'],
       poster: (movie['poster_path'].blank? ? '' : 'http://image.tmdb.org/t/p/w500/' << movie['poster_path']),
       title: movie['title'],
       synopsys: movie['overview'],
@@ -155,7 +155,6 @@ class MediaController < ApplicationController
     actors = []
     cast = cast.map { |c| {name: c['name'], photo: c['profile_path']} }
     cast.each do |person|
-      p person
       names = person[:name].split(' ')
       if names.length == 1
         names = [names.first, names.first]
