@@ -8,7 +8,6 @@ class MediaController < ApplicationController
   def index
     if params[:nb].blank?
       @nb = 0
-      # search_media
     else
       @nb = params['nb'].to_i
     end
@@ -17,6 +16,7 @@ class MediaController < ApplicationController
 
   def chatbot
     session.delete(:media)
+
     data = JSON.parse(request.body.read)['conversation']['memory']
 
     if data.has_key? 'movie'
@@ -38,12 +38,8 @@ class MediaController < ApplicationController
     end
 
     movies_sorted = movies.group_by{|x| x}.sort_by{|k, v| -v.size}.map(&:first)
-
+    
     session[:media] = fetch_to_database(movies_sorted).map { |m| m.id }.compact
-
-    pp movies_sorted
-    p movies_sorted.count
-    pp data
     redirect_to discover_path
   end
 
