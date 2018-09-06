@@ -147,5 +147,10 @@ class TmdbApiService
       .sort_by { |m| m['vote_average'].to_f }
       .reverse
   end
+  def find_trailer(id)
+    response = RestClient.get "#{@base_url}movie/#{id}/videos?api_key=#{ENV['TMDB_KEY']}"
+    key = JSON.parse(response)['results'][0]["key"]
+    link = "https://www.youtube.com/watch?v=" + key
+  end
 end
 
