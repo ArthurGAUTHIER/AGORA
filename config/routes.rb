@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  post '/chatbot', to: 'media#chatbot'
+
   get '/discover', to: 'media#index', as: 'discover'
 
   get '/dashboard', to: 'users#show', as: 'dashboard'
