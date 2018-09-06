@@ -1,4 +1,5 @@
 require 'services/tmdb_api_service'
+require 'pp'
 
 class MediaController < ApplicationController
   skip_before_action :authenticate_user!
@@ -15,7 +16,8 @@ class MediaController < ApplicationController
   end
 
   def chatbot
-    p data = JSON.parse(request.body.read)['conversation']['memory']
+    session.delete(:media)
+    data = JSON.parse(request.body.read)['conversation']['memory']
 
     if data.has_key? 'movie'
       title_search = TmdbApiService.new(data['movie']['raw']).search_movie
@@ -35,11 +37,14 @@ class MediaController < ApplicationController
       movies.count(movie)
     end
 
-    p movies_sorted = movies.group_by{|x| x}.sort_by{|k, v| -v.size}.map(&:first)
+    movies_sorted = movies.group_by{|x| x}.sort_by{|k, v| -v.size}.map(&:first)
 
-    fetch_to_database(movies_sorted)
+    session[:media] = fetch_to_database(movies_sorted).map { |m| m.id }.compact
 
-    head :ok
+    pp movies_sorted
+    p movies_sorted.count
+    pp data
+    redirect_to discover_path
   end
 
   private
@@ -83,7 +88,7 @@ class MediaController < ApplicationController
       medium_found = Medium.find_by(title: movie['title'])
       detail_movie = TmdbApiService.call_movie(movie['id'])
       if medium_found
-        medium = update_database(medium_found, detail_movie)
+        medium = medium_found
       else
         medium = store_in_database(detail_movie)
       end
