@@ -149,7 +149,11 @@ class TmdbApiService
   end
   def self.find_trailer(id)
     response = RestClient.get "https://api.themoviedb.org/3/movie/#{id}/videos?api_key=#{ENV['TMDB_KEY']}"
-    key = JSON.parse(response)['results'][0]["key"]
+    if JSON.parse(response)['results'].blank?
+      '550'
+    else
+      p JSON.parse(response)['results'][0]["key"]
+    end
   end
 end
 
