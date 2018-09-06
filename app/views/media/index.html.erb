@@ -79,8 +79,8 @@
               <div class="value"><%= @medium.studio.name %></div>
             </li>
             <li class="attribute">
-              <div class="key">Genre:</div>
-              <div class="value">Movie of ball</div>
+              <div class="key">Genre(s):</div>
+              <div class="value"><%= @medium.categories.map(&:name).join(', ') %></div>
             </li>
           </ul>
         </div>
