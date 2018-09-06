@@ -1,12 +1,9 @@
 /* Main navbar */
 .navbar-agora {
-  background: transparent;
-  position: absolute;
-  top: 0;
-  left: 0;
+  background: #FFFFFF;
   width: 100%;
   transition: all 0.3s ease;
-  height: 90px;
+  height: 80px;
   padding: 0px 30px;
   display: flex;
   align-items: center;
@@ -15,8 +12,6 @@
 
 /* Logo */
 .navbar-agora-brand img {
-  position: absolute;
-  top: 15px;
   height: 90px;
 }
 

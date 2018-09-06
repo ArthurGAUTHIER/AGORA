@@ -13,3 +13,18 @@
 @import "layouts/index";
 @import "components/index";
 @import "pages/index";
+
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  background: #000000;
+  position: relative;
+}
+
+.h-full {
+  height: 100%;
+}
