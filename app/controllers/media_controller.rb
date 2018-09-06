@@ -12,12 +12,12 @@ class MediaController < ApplicationController
       @nb = params['nb'].to_i
     end
     # @medium = Medium.find(session[:media][@nb])
-    @medium = Store.all.first.data.to_a[@nb]
+    @medium = Chiengeant.all.first.data.to_a[@nb]
   end
 
   def chatbot
     # session.delete(:media)
-    Store.destroy_all unless Store.all.blank?
+    Chiengeant.destroy_all unless Chiengeant.all.blank?
 
     data = JSON.parse(request.body.read)['conversation']['memory']
 
@@ -43,8 +43,8 @@ class MediaController < ApplicationController
 
     # session[:media] = fetch_to_database(movies_sorted).map { |m| m.id }.compact
     media = fetch_to_database(movies_sorted).map { |m| m.id }.compact
-    store_data = Store.new(data: media)
-    store_data.save
+    Chiengeant.create(data: media)
+
 
     head :ok
   end
