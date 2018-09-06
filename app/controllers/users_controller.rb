@@ -38,21 +38,25 @@ class UsersController < ApplicationController
   end
 
   def favorite(type)
-    name_tab = Library.all.where(already_watched: true, user: current_user).map do |instance|
-      if type == 'categories'
-        instance.medium.send(type.to_sym).map { |element| element.name }
-      elsif type == 'actors' || type == 'directors'
-        instance.medium.send(type.to_sym).map { |element| element.full_name }
-       else
-        instance.medium.send(type.to_sym).name
+    if Library.all.where(already_watched: true, user: current_user) == []
+      return 0
+    else
+      name_tab = Library.all.where(already_watched: true, user: current_user).map do |instance|
+        if type == 'categories'
+          instance.medium.send(type.to_sym).map { |element| element.name }
+        elsif type == 'actors' || type == 'directors'
+          instance.medium.send(type.to_sym).map { |element| element.full_name }
+         else
+          instance.medium.send(type.to_sym).name
+        end
       end
+      name_uniq = name_tab.flatten.uniq
+      name_count = name_uniq.map do |occurence|
+        name_tab.flatten.count(occurence)
+      end
+      value_max = name_count.each_with_index.max[1]
+      return name_uniq[value_max]
     end
-    name_uniq = name_tab.flatten.uniq
-    name_count = name_uniq.map do |occurence|
-      name_tab.flatten.count(occurence)
-    end
-    value_max = name_count.each_with_index.max[1]
-    return name_uniq[value_max]
   end
 end
 

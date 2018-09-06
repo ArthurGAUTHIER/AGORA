@@ -1,3 +1,8 @@
 .color-font{
 color: $white;
 }
+
+.hover-btn:hover {
+  color: $grey;
+  border: solid 2px $grey;
+}

@@ -1,8 +1,16 @@
 .card-dashboard {
   height: 370px;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
-  box-shadow: 1px 1px 10px $black;
+  // text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  box-shadow: 1px 1px 10px rgba(0,0,0,0.4);
   position: relative;
+  margin: 20px auto 0px auto;
+  width: 217px;
+  transition: box-shadow 0.2s ease;
+  &:hover {
+    opacity: 0.8;
+    box-shadow: 4px 4px 15px rgba(0,0,0,0.3);
+    transition: box-shadow 0.3s ease;
+  }
 }
 
 .card-body {
@@ -42,11 +50,6 @@
 
 .card-description h2 {
   font-size: 18px;
-}
-
-
-.card-dashboard:hover {
-  opacity: 0.8;
 }
 
 .card-link {

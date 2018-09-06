@@ -1,6 +1,7 @@
 <div class="banner" style="background-image: radial-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)),url('<%= image_path 'redseat.jpg' %>');">
   <div class="banner-content">
     <div>
+      <%= image_tag "logo.png", height: 150 %>
       <form action="<%= discover_path %>" class="color-grey">
         <div>
           <%= render 'components/card_home' %>
@@ -48,3 +49,4 @@
     hidiv.hidden = !hidiv.hidden
   });
 </script>
+<script src="https://cdn.recast.ai/webchat/webchat.js" channelId="d87960c7-1f20-42ef-a5b5-b9a7aeb42ad1" token="79cdbe07f3cd26e5ba0dbfe0b5912e95" id="recast-webchat"></script>

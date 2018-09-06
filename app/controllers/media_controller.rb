@@ -1,19 +1,54 @@
 require 'services/tmdb_api_service'
+require 'pp'
 
 class MediaController < ApplicationController
   skip_before_action :authenticate_user!
+  skip_before_action :verify_authenticity_token, only: [:chatbot]
 
   def index
     if params[:nb].blank?
       @nb = 0
-      search_media
     else
       @nb = params['nb'].to_i
     end
     @medium = Medium.find(session[:media][@nb])
   end
 
+  def chatbot
+    session.delete(:media)
+
+    data = JSON.parse(request.body.read)['conversation']['memory']
+
+    if data.has_key? 'movie'
+      title_search = TmdbApiService.new(data['movie']['raw']).search_movie
+    end
+
+    if data.has_key? 'genre'
+      genre_search = TmdbApiService.new(data['genre']['raw']).sort_by_genre
+    end
+
+    if data.has_key? 'person'
+      person_search = TmdbApiService.new(data['person']['raw']).search_person
+    end
+
+    movies = (title_search || [] + genre_search || [] + person_search || []).compact
+
+    movies_count = movies.uniq.map do |movie|
+      movies.count(movie)
+    end
+
+    movies_sorted = movies.group_by{|x| x}.sort_by{|k, v| -v.size}.map(&:first)
+    
+    session[:media] = fetch_to_database(movies_sorted).map { |m| m.id }.compact
+    redirect_to discover_path
+  end
+
   private
+
+  # def json_request?
+  #   p request.body
+  #   p request.format.json?
+  # end
 
   def search_media
     session.delete(:media)
@@ -49,7 +84,7 @@ class MediaController < ApplicationController
       medium_found = Medium.find_by(title: movie['title'])
       detail_movie = TmdbApiService.call_movie(movie['id'])
       if medium_found
-        medium = update_database(medium_found, detail_movie)
+        medium = medium_found
       else
         medium = store_in_database(detail_movie)
       end
