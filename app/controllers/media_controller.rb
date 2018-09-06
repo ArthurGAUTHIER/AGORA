@@ -43,7 +43,7 @@ class MediaController < ApplicationController
     movies_sorted = movies.group_by{|x| x}.sort_by{|k, v| -v.size}.map(&:first)
 
     # session[:media] = fetch_to_database(movies_sorted).map { |m| m.id }.compact
-    Store.create(data: JSON.generate(fetch_to_database(movies_sorted).map { |m| m.id }.compact))
+    Store.create(data: fetch_to_database(movies_sorted).map { |m| m.id }.compact)
     head :ok
   end
 
