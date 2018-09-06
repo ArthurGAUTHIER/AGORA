@@ -6,14 +6,13 @@ class MediaController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:chatbot]
 
   def index
-    Store.all.first.data
     if params[:nb].blank?
       @nb = 0
     else
       @nb = params['nb'].to_i
     end
     # @medium = Medium.find(session[:media][@nb])
-    @medium = JSON.parse(Store.all.first.data)[@nb]
+    @medium = Store.all.first.data.to_a[@nb]
   end
 
   def chatbot
