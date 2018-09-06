@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_06_173730) do
+ActiveRecord::Schema.define(version: 2018_09_06_190106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -157,6 +157,12 @@ ActiveRecord::Schema.define(version: 2018_09_06_173730) do
     t.datetime "updated_at", null: false
     t.index ["medium_id"], name: "index_reviews_on_medium_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "stores", force: :cascade do |t|
+    t.jsonb "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "studios", force: :cascade do |t|

@@ -11,11 +11,14 @@ class MediaController < ApplicationController
     else
       @nb = params['nb'].to_i
     end
-    @medium = Medium.find(session[:media][@nb])
+    # @medium = Medium.find(session[:media][@nb])
+    @data = Chiengeant.all.first.data[1...-1].split(',').map(&:to_i)
+    @medium = Medium.find(@data[@nb])
   end
 
   def chatbot
-    session.delete(:media)
+    # session.delete(:media)
+    Chiengeant.destroy_all unless Chiengeant.all.blank?
 
     data = JSON.parse(request.body.read)['conversation']['memory']
 
@@ -39,8 +42,12 @@ class MediaController < ApplicationController
 
     movies_sorted = movies.group_by{|x| x}.sort_by{|k, v| -v.size}.map(&:first)
 
-    session[:media] = fetch_to_database(movies_sorted).map { |m| m.id }.compact
-    redirect_to discover_path
+    # session[:media] = fetch_to_database(movies_sorted).map { |m| m.id }.compact
+    media = fetch_to_database(movies_sorted).map { |m| m.id }.compact
+    Chiengeant.create(data: media)
+
+
+    head :ok
   end
 
   private
@@ -114,15 +121,15 @@ class MediaController < ApplicationController
     directors = find_directors(movie_credits['crew'])
 
     medium = Medium.create(
-      tmdbid: movie['id'],
+      tmdbid: movie['id'].to_i,
       poster: (movie['poster_path'].blank? ? '' : 'http://image.tmdb.org/t/p/w500/' << movie['poster_path']),
       title: movie['title'],
       synopsys: movie['overview'],
-      duration: movie['runtime'],
-      year: (movie['release_date'].blank? ? '' : movie['release_date'].match(/\d{4}/)[0]),
+      duration: movie['runtime'].to_i,
+      year: (movie['release_date'].blank? ? '' : movie['release_date'].match(/\d{4}/)[0].to_i),
       country: (movie['production_countries'].blank? ? nil : movie['production_countries'][0]['name']),
-      press_rating: movie['vote_average'], # TODO: use IMDB for rating
-      audience_rating: movie['vote_average'],
+      press_rating: movie['vote_average'].to_f, # TODO: use IMDB for rating
+      audience_rating: movie['vote_average'].to_f,
       language: movie['original_language'],
       studio: studio
       )
