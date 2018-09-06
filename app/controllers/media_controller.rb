@@ -12,7 +12,8 @@ class MediaController < ApplicationController
       @nb = params['nb'].to_i
     end
     # @medium = Medium.find(session[:media][@nb])
-    @medium = Chiengeant.all.first.data[1...-1].split(',').map(&:to_i)[@nb]
+    @data = Chiengeant.all.first.data[1...-1].split(',').map(&:to_i)
+    @medium = Medium.find(@data[@nb])
   end
 
   def chatbot
