@@ -43,8 +43,10 @@ class MediaController < ApplicationController
     movies_sorted = movies.group_by{|x| x}.sort_by{|k, v| -v.size}.map(&:first)
 
     # session[:media] = fetch_to_database(movies_sorted).map { |m| m.id }.compact
-    p media = fetch_to_database(movies_sorted).map { |m| m.id }.compact
-    Store.create(data: media)
+    media = fetch_to_database(movies_sorted).map { |m| m.id }.compact
+    store_data = Store.new(data: media)
+    store_data.save
+
     head :ok
   end
 
