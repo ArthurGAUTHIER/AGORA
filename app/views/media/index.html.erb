@@ -11,16 +11,20 @@
     <input type="submit" class="next-button" value=">"></input>
   </form>
 <% end %>
+
+
+<% video_id = TmdbApiService.find_trailer(@medium.tmdbid) %>
+
 <div class="container movie-show">
   <div class="row h-full">
     <% search = URI.escape(@medium.title.tr(' ', '+') << 'Trailer') %>
-    <div class="col-xs-12 col-md-7 h-full" style="background: url(<%= image_url('https://img.youtube.com/vi/sAOzrChqmd0/maxresdefault.jpg') %>) center; background-size: cover;">
+    <div class="col-xs-12 col-md-7 h-full" style="background: url(<%= image_url("https://img.youtube.com/vi/#{video_id}/maxresdefault.jpg") %>) center; background-size: cover;">
       <div class="overlay"></div>
 
       <div class="movie-preview">
         <div class="row">
           <div class="col-xs-12 col-md-8">
-            <div class="youtube-player" data-id="sAOzrChqmd0"></div>
+            <div class="youtube-player" data-id="<%= video_id %>"></div>
             <div class="ratings">
               <% audience_rating = (@medium.audience_rating / 2).round %>
               <% press_rating = (@medium.press_rating / 2).round %>
@@ -66,7 +70,7 @@
           <ul class="attributes-list">
             <li class="attribute">
               <div class="key">Direction:</div>
-              <% @medium.directors.reverse.each do |director| %>
+              <% @medium.directors.each do |director| %>
                 <div class="value"><%= director.full_name %></div>
               <% end %>
             </li>
@@ -85,7 +89,7 @@
           <%# <h3>CAST</h3> %>
 
           <div class="actors">
-            <% @medium.actors.reverse.each do |actor| %>
+            <% @medium.actors.each do |actor| %>
               <div class="actor">
                 <%= image_tag (actor.photo.blank? ? 'blank-avatar.png' : actor.photo) %>
                 <div class="name">
