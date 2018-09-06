@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'users#show', as: 'dashboard'
   devise_for :users
 
+  scope :bot do
+    post 'send', to: 'bot#send_message', as: :bot_send
+  end
+
   root to: 'pages#home'
 
   resources :media, only: [] do

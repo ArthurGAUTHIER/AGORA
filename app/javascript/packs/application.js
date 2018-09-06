@@ -2,24 +2,27 @@ import "bootstrap";
 
 
 console.log('Hello Libraries')
+const mediumIdElement = document.getElementById('medium-id');
 
-const mediumId = parseInt(document.getElementById('medium-id').textContent, 10)
-console.log(mediumId);
-document.getElementById('blacklist').addEventListener('click', (event) => {
-  console.log('blacklist')
-  sendData('blacklist')
-});
+if (mediumIdElement) {
+  const mediumId = parseInt(mediumIdElement.textContent, 10)
+  console.log(mediumId);
 
-document.getElementById('already_watched').addEventListener('click', (event) => {
-  console.log('already_watched')
-  sendData('already_watched')
-});
+  document.getElementById('blacklist').addEventListener('click', (event) => {
+    console.log('blacklist')
+    sendData('blacklist')
+  });
 
-document.getElementById('watch_later').addEventListener('click', (event) => {
-  console.log('watch_later')
-  sendData('watch_later')
-});
+  document.getElementById('already_watched').addEventListener('click', (event) => {
+    console.log('already_watched')
+    sendData('already_watched')
+  });
 
+  document.getElementById('watch_later').addEventListener('click', (event) => {
+    console.log('watch_later')
+    sendData('watch_later')
+  });
+}
 
 const sendData = (bouton) => {
   fetch(`/media/${mediumId}/libraries`, {
