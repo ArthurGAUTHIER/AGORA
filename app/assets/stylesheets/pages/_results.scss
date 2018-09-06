@@ -1,0 +1,196 @@
+.next-button {
+  color: $red;
+  position: absolute;
+  top: 45vh;
+  right: 5vh;
+  font-size: 50px;
+  background: none;
+  border: 3px solid $red;
+}
+
+.previous-button {
+  color: $red;
+  position: absolute;
+  top: 45vh;
+  left: 5vh;
+  font-size: 50px;
+  background: none;
+  border: 3px solid $red;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #000;
+  opacity: 0.65;
+}
+
+.movie-show {
+  color: #FFFFFF;
+  height: calc(100vh - 80px);
+
+  .movie-preview {
+    position: absolute;
+    bottom: 60px;
+    width: 100%;
+  }
+
+  .ratings {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+
+  .rating {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .title {
+      font-size: 1em;
+      font-weight: 100;
+    }
+  }
+
+  .synopsis {
+    font-size: .9em;
+  }
+
+  .movie-details {
+    padding-top: 20px;
+
+    h2 {
+      font-size: 1.4em;
+    }
+
+    i {
+      font-size: 1em;
+      margin-bottom: 30px;
+    }
+
+
+    .movie-attributes {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 50px;
+
+      img {
+        height: 300px;
+      }
+
+      .attributes-list {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        list-style: none;
+      }
+
+      .attribute {
+        .key {
+          font-weight: bold;
+          text-decoration: underline;
+        }
+
+        .value {
+          font-size: .9em;
+        }
+      }
+    }
+
+    .cast {
+      h3 {
+        text-align: center;
+        text-decoration: underline;
+        width: 100%;
+        font-size: 1.2em;
+      }
+
+      .actors {
+        display: flex;
+        flex-wrap: wrap;
+        height: 100%;
+        overflow: scroll;
+        height: 500px;
+      }
+
+      .actor {
+        width: 33%;
+        position: relative;
+
+        img {
+          width: 100%;
+        }
+
+        .name {
+          position: absolute;
+          bottom: 0;
+          text-align: center;
+          width: 100%;
+          background: #000000CC;
+          padding: 6px 0;
+          font-size: .7em;
+        }
+      }
+    }
+  }
+}
+
+
+.youtube-player {
+  position: relative;
+  padding-bottom: 56.23%;
+  /* Use 75% for 4:3 videos */
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  background: #000;
+  margin: 5px;
+  margin-bottom: 50px;
+}
+
+.youtube-player iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background: transparent;
+}
+
+.youtube-player img {
+  bottom: 0;
+  display: block;
+  left: 0;
+  margin: auto;
+  max-width: 100%;
+  width: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: none;
+  height: auto;
+  cursor: pointer;
+  -webkit-transition: .4s all;
+  -moz-transition: .4s all;
+  transition: .4s all;
+}
+
+.youtube-player img:hover {
+  -webkit-filter: brightness(75%);
+}
+
+.youtube-player .play {
+  height: 72px;
+  width: 72px;
+  left: 50%;
+  top: 50%;
+  margin-left: -36px;
+  margin-top: -36px;
+  position: absolute;
+  background: url("//i.imgur.com/TxzC70f.png") no-repeat;
+  cursor: pointer;
+}
