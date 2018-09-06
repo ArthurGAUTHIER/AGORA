@@ -6,16 +6,19 @@ class MediaController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:chatbot]
 
   def index
+    Store.all.first.data
     if params[:nb].blank?
       @nb = 0
     else
       @nb = params['nb'].to_i
     end
-    @medium = Medium.find(session[:media][@nb])
+    # @medium = Medium.find(session[:media][@nb])
+    @medium = JSON.parse(Store.all.first.data)[@nb]
   end
 
   def chatbot
-    session.delete(:media)
+    # session.delete(:media)
+    Store.destroy_all
 
     data = JSON.parse(request.body.read)['conversation']['memory']
 
@@ -39,8 +42,9 @@ class MediaController < ApplicationController
 
     movies_sorted = movies.group_by{|x| x}.sort_by{|k, v| -v.size}.map(&:first)
 
-    session[:media] = fetch_to_database(movies_sorted).map { |m| m.id }.compact
-    redirect_to discover_path
+    # session[:media] = fetch_to_database(movies_sorted).map { |m| m.id }.compact
+    Store.create(data: JSON.generate(fetch_to_database(movies_sorted).map { |m| m.id }.compact))
+    head :ok
   end
 
   private
