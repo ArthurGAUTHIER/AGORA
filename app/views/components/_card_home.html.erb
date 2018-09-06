@@ -1,12 +1,14 @@
-<div class="card-home" id="card-home">
-  <h2 id='homepage-title'>No more Netflix scrolling ?</h2>
-  <h2 id='homepage-title'>Find your movie here!</h2>
-<br>
-  <div>
-    <input type="text" name="q" placeholder="Genre, actor, duration, mood..." class="form-input">
-    <input type="submit" value="Find !" class="btn-search">
+<!-- <div class="card-home" id="card-home"> -->
+<!--   <h2 id='homepage-title'>No more Netflix scrolling ?</h2>
+  <h2 id='homepage-title'>Find your movie here!</h2> -->
+  <br><br><br><br>
+  <div class="form-set">
+    <form action="<%= discover_path %>">
+      <input type="text" placeholder="   What do you feelm like watching?" name="q" class="form-search">
+      <button type="submit" value="SEARCH" class="btn btn-danger">SEARCH</button>
+    </form>
   </div>
   <br>
-  <p class="color-grey">Advanced Search</p>
-  <div id='adv-search' class='btn-adv-search'><i class="fas fa-angle-double-down"></i></div>
-</div>
+<!--   <p class="color-grey">Advanced Search</p>
+  <div id='adv-search' class='btn-adv-search'><i class="fas fa-angle-double-down"></i></div> -->
+<!-- </div> -->
