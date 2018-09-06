@@ -1,3 +1,3 @@
 class Chiengeant < ApplicationRecord
-  validates :store, presence: true
+  validates :data, presence: true
 end
