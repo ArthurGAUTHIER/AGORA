@@ -18,7 +18,7 @@ class MediaController < ApplicationController
 
   def chatbot
     # session.delete(:media)
-    Store.destroy_all
+    Store.destroy_all unless Store.all.blank?
 
     data = JSON.parse(request.body.read)['conversation']['memory']
 
