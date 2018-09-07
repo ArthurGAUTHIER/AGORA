@@ -1,4 +1,5 @@
-<div id="medium-id" hidden><%= @medium.id %></div>
+<div id="medium-id" hidden><%= session[:media][@nb] %></div>
+
 <% if @nb > 0 %>
   <form action="<%= discover_path %>">
     <input type="text" id="back" name="nb" value="<%= @nb - 1 %>" hidden></input>

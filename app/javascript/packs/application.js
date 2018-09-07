@@ -7,22 +7,22 @@ const mediumIdElement = document.getElementById('medium-id');
 if (mediumIdElement) {
   const mediumId = parseInt(mediumIdElement.textContent, 10)
   console.log(mediumId);
-
-  document.getElementById('blacklist').addEventListener('click', (event) => {
-    console.log('blacklist')
-    sendData('blacklist')
-  });
-
-  document.getElementById('already_watched').addEventListener('click', (event) => {
-    console.log('already_watched')
-    sendData('already_watched')
-  });
-
-  document.getElementById('watch_later').addEventListener('click', (event) => {
-    console.log('watch_later')
-    sendData('watch_later')
-  });
 }
+
+document.getElementById('blacklist').addEventListener('click', (event) => {
+  console.log('blacklist')
+  sendData('blacklist')
+});
+
+document.getElementById('already_watched').addEventListener('click', (event) => {
+  console.log('already_watched')
+  sendData('already_watched')
+});
+
+document.getElementById('watch_later').addEventListener('click', (event) => {
+  console.log('watch_later')
+  sendData('watch_later')
+});
 
 const sendData = (bouton) => {
   fetch(`/media/${mediumId}/libraries`, {
