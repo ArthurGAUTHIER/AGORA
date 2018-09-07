@@ -1,6 +1,6 @@
 <template>
   <div class="chatview">
-    <div class="messages">
+    <div class="messages" v-chat-scroll>
       <div v-for="message in messages" :key="message.id">
         <div class="chatMessage" :class="message.side">
           <div>
@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="input">
-      <input type="text" v-model="message">
+      <input type="text" v-model="message" @keyup.enter="sendMessage">
       <button @click="sendMessage">SEND</button>
     </div>
   </div>
@@ -27,8 +27,19 @@ export default {
     return {
       conversationId: Math.random(0).toString(36).substr(2),
       message: '',
-      messages: [],
+      messages: [
+      ],
     }
+  },
+
+  mounted() {
+    setTimeout(() => {
+      this.messages.push({
+        id: 0,
+        side: 'received',
+        content: 'I am Agora and I am here to help you find something to watch',
+      })
+    }, 2000)
   },
 
   methods: {
@@ -53,8 +64,9 @@ export default {
           data.response.messages.forEach((message) => {
             if (message.content.match(/\$chiengeant/)) {
               window.location.href = '/discover';
+            } else {
+              this.messages.push({...message, side: 'received', id: (this.messages.length + 1) });
             }
-            this.messages.push({...message, side: 'received', id: (this.messages.length + 1) });
           })
         })
         .catch(function (error) {
@@ -70,10 +82,11 @@ export default {
   margin-top: 30px;
   height: 50vh;
   width: 700px;
-  background: #FFFFFF;
+  background: #FFFFFF55;
   margin-bottom: 20px;
   padding: 20px;
   overflow: scroll;
+  border-radius: 10px;
 }
 
 .input {
@@ -84,6 +97,7 @@ input {
   width: 80%;
   height: 50px;
   padding: 2px 10px;
+  opacity: .76;
 }
 
 button {
