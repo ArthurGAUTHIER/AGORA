@@ -61,6 +61,7 @@ export default {
         }
       })
         .then(({data}) => {
+          console.log(data);
           data.response.messages.forEach((message) => {
             if (message.content.match(/\$chiengeant/)) {
               window.location.href = '/discover';
