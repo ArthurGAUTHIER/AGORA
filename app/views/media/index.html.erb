@@ -22,19 +22,19 @@
     <div class="col-xs-12 col-md-7 h-full" style="background: url(<%= image_url("https://img.youtube.com/vi/#{video_id}/maxresdefault.jpg") %>) center; background-size: cover;">
       <div class="overlay"></div>
 
-      <div class="video-header">
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="text-center">
-              <div id="already_watched" class="btn btn-lg btn-danger">Already watched</div>
-              <span class="spacer"></span>
-              <div id="watch_later" class="btn btn-lg btn-danger">Watch later</div>
-              <span class="spacer"></span>
-              <div id="blacklist" class="btn btn-lg btn-danger">Blacklist</div>
+      <% if user_signed_in? %>
+        <div class="video-header">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="text-center">
+                <%= link_to 'Already watched', medium_libraries_path(@medium.id, already_watched: true), method: :post, class: "account-action fa fa-glasses"  %>
+                <%= link_to 'Watch later', medium_libraries_path(@medium.id, watch_later: true), method: :post, class: "account-action fa fa-hourglass"  %>
+                <%= link_to 'Blacklist', medium_libraries_path(@medium.id, blacklist: true), method: :post, class: "account-action fa fa-times-circle"  %>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      <% end %>
       <div class="movie-preview">
         <div class="row">
           <div class="col-xs-12 col-md-8">

@@ -1,6 +1,8 @@
 class LibrariesController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def create
-    data = JSON.parse(request.body.read)
+    # data = JSON.parse(request.body.read)
     not_in_library = true
 
     current_user.libraries.each do |library|
@@ -8,9 +10,9 @@ class LibrariesController < ApplicationController
       if library.medium == medium
         not_in_library = false
         library.update(
-          blacklist: data['blacklist'],
-          already_watched: data['already_watched'],
-          watch_later: data['watch_later']
+          blacklist: params['blacklist'],
+          already_watched: params['already_watched'],
+          watch_later: params['watch_later']
           )
       end
     end
@@ -19,12 +21,12 @@ class LibrariesController < ApplicationController
       Library.create(
         user: current_user,
         medium: Medium.find(params[:medium_id]),
-        blacklist: data['blacklist'],
-        already_watched: data['already_watched'],
-        watch_later: data['watch_later']
+        blacklist: params['blacklist'],
+        already_watched: params['already_watched'],
+        watch_later: params['watch_later']
       )
     end
 
-    head :ok
+    redirect_back(fallback_location: root_path)
   end
 end

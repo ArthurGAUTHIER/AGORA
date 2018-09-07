@@ -32,6 +32,25 @@
   color: #FFFFFF;
   height: calc(100vh - 80px);
 
+  .video-header {
+    padding: 10px 0;
+    background: #000000CC !important;
+  }
+
+  .account-action {
+    cursor: pointer;
+    margin-right: 20px;
+    color: #FFFFFF;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &::before {
+      margin-right: 10px;
+    }
+  }
+
   .movie-preview {
     position: absolute;
     bottom: 60px;

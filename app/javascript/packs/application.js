@@ -3,39 +3,37 @@ import "bootstrap";
 
 console.log('Hello Libraries')
 const mediumIdElement = document.getElementById('medium-id');
+const mediumId = parseInt(mediumIdElement.textContent, 10)
 
-if (mediumIdElement) {
-  const mediumId = parseInt(mediumIdElement.textContent, 10)
-  console.log(mediumId);
-}
+// document.getElementById('blacklist').addEventListener('click', (event) => {
+//   console.log('blacklist')
+//   sendData('blacklist')
+// });
 
-document.getElementById('blacklist').addEventListener('click', (event) => {
-  console.log('blacklist')
-  sendData('blacklist')
-});
+// document.getElementById('already_watched').addEventListener('click', (event) => {
+//   console.log('already_watched')
+//   console.log(mediumIdElement);
+//   sendData('already_watched')
+// });
 
-document.getElementById('already_watched').addEventListener('click', (event) => {
-  console.log('already_watched')
-  sendData('already_watched')
-});
-
-document.getElementById('watch_later').addEventListener('click', (event) => {
-  console.log('watch_later')
-  sendData('watch_later')
-});
+// document.getElementById('watch_later').addEventListener('click', (event) => {
+//   console.log('watch_later')
+//   sendData('watch_later')
+// });
 
 const sendData = (bouton) => {
   fetch(`/media/${mediumId}/libraries`, {
     method: 'POST',
     headers: {
       'Content-Type': 'app/JSON',
-      'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      // 'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
     },
     body: createLibraryJSON(bouton)
   }).then((response) => {
-    if (response.redirected) {
-      window.location.replace(response.url);
-    }
+    console.log(response);
+    // if (response.redirected) {
+    //   window.location.replace(response.url);
+    // }
   });
 }
 

@@ -147,6 +147,7 @@ class TmdbApiService
       .sort_by { |m| m['vote_average'].to_f }
       .reverse
   end
+
   def self.find_trailer(id)
     response = RestClient.get "https://api.themoviedb.org/3/movie/#{id}/videos?api_key=#{ENV['TMDB_KEY']}"
     if JSON.parse(response)['results'].blank?
