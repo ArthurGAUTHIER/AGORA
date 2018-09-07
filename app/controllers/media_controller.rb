@@ -22,6 +22,8 @@ class MediaController < ApplicationController
 
     data = JSON.parse(request.body.read)['conversation']['memory']
 
+    p "DATA: " + data.inspect,
+
     if data.has_key? 'movie'
       title_search = TmdbApiService.new(data['movie']['raw']).search_movie
     end
@@ -47,7 +49,9 @@ class MediaController < ApplicationController
     Chiengeant.create(data: media)
 
 
-    head :ok
+    render json: {
+      replies: [{ type: 'text', content: 'Roger that' }],
+    }
   end
 
   private

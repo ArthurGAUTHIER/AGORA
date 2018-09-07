@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   layout 'home'
 
   def home
-    session.delete(:media) unless session[:media].nil?
+    # Chiengeant.destroy_all unless Chiengeant.all.blank?
+    # session.delete(:media) unless session[:media].nil?
   end
 end

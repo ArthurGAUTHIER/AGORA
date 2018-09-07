@@ -65,7 +65,7 @@ class TmdbApiService
     response = RestClient.get "#{@base_url}genre/movie/list?api_key=#{@key}"
     categories = JSON.parse(response)["genres"]
     genre_id = ""
-    categories.each {|category| genre_id = category["id"] if @data == category["name"]}
+    categories.each {|category| genre_id = category["id"] if @data.downcase == category["name"].downcase}
     genre = RestClient.get "#{@base_url}discover/movie?api_key=#{@key}&with_genres=#{genre_id}"
     movies = JSON.parse(genre)["results"]
     movies.reject { |m| m['video'] == true }.sort_by{|h| h['vote_average'].to_f}.reverse
