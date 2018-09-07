@@ -25,7 +25,7 @@ export default {
 
   data: function () {
     return {
-      conversationId: 'conversation',
+      conversationId: Math.random(0).toString(36).substr(2),
       message: '',
       messages: [],
     }
