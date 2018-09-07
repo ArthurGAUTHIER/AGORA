@@ -21,6 +21,19 @@
     <div class="col-xs-12 col-md-7 h-full" style="background: url(<%= image_url("https://img.youtube.com/vi/#{video_id}/maxresdefault.jpg") %>) center; background-size: cover;">
       <div class="overlay"></div>
 
+      <div class="video-header">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="text-center">
+              <div id="already_watched" class="btn btn-lg btn-danger">Already watched</div>
+              <span class="spacer"></span>
+              <div id="watch_later" class="btn btn-lg btn-danger">Watch later</div>
+              <span class="spacer"></span>
+              <div id="blacklist" class="btn btn-lg btn-danger">Blacklist</div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="movie-preview">
         <div class="row">
           <div class="col-xs-12 col-md-8">
